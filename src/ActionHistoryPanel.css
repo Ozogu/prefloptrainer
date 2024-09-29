@@ -1,0 +1,67 @@
+.action-history-panel {
+    height: 100vh; /* Full height */
+    overflow-y: auto;
+    width: 250px; /* Set the width of the action-history-panel */
+    position: fixed; /* Fixed action-history-panel */
+    top: 0;
+    right: 0; /* Move to the right side */
+    background-color: #111; /* Dark background */
+    padding-top: 20px; /* Padding at the top */;
+  }
+
+.action-history-panel .button {
+  width: 7.5rem;
+}
+
+.action-history-panel .button.active {
+  background-color: var(--light-grey);
+}
+
+  .action-history-panel h3 {
+    margin-top: 0;
+    color: white;
+    text-align: center;
+  }
+
+  .action-history-panel ul {
+    padding: 0; /* Remove padding */
+    list-style-type: none; /* Remove bullets */
+  }
+
+  .action-history-panel li {
+    padding: 0px 16px; /* Padding for list items */
+    text-align: center; /* Center-align text */
+    color: white; /* White text color */
+    cursor: pointer; /* Pointer cursor on hover */
+    list-style-type: none; /* Remove bullets */
+  }
+
+  .action-history-panel .correct {
+    background-color: var(--green);
+  }
+
+  .action-history-panel .incorrect {
+    background-color: var(--red);
+  }
+
+  .action-history-panel .card {
+
+  }
+
+/* ActionHistoryPanel.css */
+.item-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Optional: Align items vertically centered */
+  gap: 10px; /* Optional: Adds space between items */
+}
+
+.hole-cards {
+  display: flex;
+  flex-direction: row;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+}

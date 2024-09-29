@@ -1,0 +1,21 @@
+.score {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+  }
+
+  .score h1 {
+    font-size: 16px; /* Smaller font size */
+    margin: 0 10px; /* Add some horizontal margin */
+    padding: 5px; /* Smaller padding */
+    border-radius: 5px;
+    color: white;
+  }
+
+  .score .correct {
+    background-color: var(--green);
+  }
+
+  .score .incorrect {
+    background-color: var(--red);
+  }

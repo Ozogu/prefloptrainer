@@ -1,0 +1,93 @@
+.range-selector {
+    height: 100vh; /* Full height */
+    overflow-y: auto;
+    width: 250px; /* Set the width of the range-selector */
+    position: fixed; /* Fixed range-selector */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Dark background */
+    padding-top: 20px; /* Padding at the top */
+  }
+
+  .range-selector ul {
+
+    padding: 0; /* Remove padding */
+  }
+
+  .range-selector li {
+    padding: 8px 16px; /* Padding for list items */
+    text-align: center; /* Center-align text */
+    color: white; /* White text color */
+    cursor: pointer; /* Pointer cursor on hover */
+    list-style-type: none; /* Remove bullets */
+  }
+
+  .range-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid var(--light-grey);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: var(--dark-grey);
+    transition: background-color 0.3s ease;
+  }
+
+  .range-item:hover {
+    background-color: var(--light-grey);
+  }
+
+  .range-item:hover span {
+    color: white;
+  }
+
+  .range-item input[type="checkbox"] {
+    margin-right: 10px;
+  }
+
+  .range-item.clicked {
+    background-color: #d3d3d3a3; /* Change this to the desired color */
+  }
+
+  .range-item.clicked span {
+    color: white;
+  }
+
+  .range-item span {
+    font-size: 1rem;
+    color: var(--light-grey);
+  }
+
+  .collapsible-group {
+    margin-bottom: 10px;
+  }
+
+  .group-header {
+    cursor: pointer;
+    background-color: var(--dark-grey);
+    padding: 10px;
+    border: 1px solid var(--light-grey);
+    border-radius: 5px;
+    color: var(--light-grey);
+  }
+
+  .group-header:hover {
+    background-color: var(--light-grey);
+  }
+
+  .group-content {
+    padding: 10px;
+    border: 1px solid var(--light-grey);
+    border-radius: 5px;
+    background-color: var(--dark-grey);
+  }
+
+  .collapsible-group.expanded .group-header {
+    background-color: var(--light-grey);;
+    color: white;
+  }
+
+  .collapsible-group.enabled-ranges .group-header {
+    background-color: var(--light-grey);;
+    color: white;
+  }

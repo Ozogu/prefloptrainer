@@ -1,0 +1,66 @@
+.container {
+    margin: 1rem;
+  }
+
+.button {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid var(--light-grey);
+  border-radius: 5px;
+  margin-bottom: 5px;
+  background-color: var(--dark-grey);
+  transition: background-color 0.3s ease;
+  width: 5rem;
+  position: relative; /* Moved here for consistency */
+}
+
+.button span {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.raise {
+  background-color: var(--red);
+}
+
+.call {
+  background-color: var(--green);
+}
+
+.fold {
+  background-color: var(--light-grey);
+}
+
+.feedback {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  animation: fadeOut 3s forwards;
+  pointer-events: none;
+}
+
+.feedback.correct {
+  background-color: var(--green);
+}
+
+.feedback.incorrect {
+  background-color: var(--red);
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -300%);
+  }
+}

@@ -1,0 +1,69 @@
+[
+    {
+        "Heads-up": [
+            {
+                "name": "SB RFI",
+                "raise": "22+, A2s+, A2o+, K2s+, K2o+, Q2s+, Q4o+, J2s+, J5o+, T2s+, T5o+, 92s+, 95o+, 82s+, 85o+, 72s+, 74o+, 62s+, 64o+, 52s+, 53o+, 42s+, 43o, 32s",
+                "call": "",
+                "hero": {
+                    "SB": 0.5
+                },
+                "villains": [
+                    {}
+                ]
+            },
+            {
+                "name": "BB vs RFI",
+                "raise": "44+, A7s+, A5s-A4s, AJo+, K7s+, KJo+, Q8s+, QJo, J8s+, T8s+, 97s+, 86s+, 75s+, 64s+, 54s",
+                "call": "33-22, A6s, A3s-A2s, ATo-A2o, K6s-K2s, KTo-K2o, Q7s-Q2s, QTo-Q4o, J7s-J2s, J5o+, T7s-T2s, T5o+, 96s-92s, 96o+, 85s-82s, 86o+, 74s-72s, 75o+, 63s-62s, 65o, 53s-52s, 54o, 42s+, 32s",
+                "hero": {
+                    "BB": 1
+                },
+                "villains": [
+                    {
+                        "SB": 2.5
+                    }
+                ]
+            },
+            {
+                "name": "SB vs 3 bet",
+                "raise": "TT+, AJs+, A5s-A4s, AKo, KQs",
+                "call": "99-22, ATs-A6s, A3s-A2s, AQo-A6o, KJs-K2s, K8o+, Q2s+, Q9o+, J4s+, J9o+, T5s+, T9o, 95s+, 85s+, 74s+, 63s+, 52s+, 42s+, 32s",
+                "hero": {
+                    "SB": 2.5
+                },
+                "villains": [
+                    {
+                        "BB": 10
+                    }
+                ]
+            },
+            {
+                "name": "BB vs 4 bet",
+                "raise": "TT+, AKs, A5s, AKo",
+                "call": "99-44, AQs-A6s, A4s-A2s, AQo, K8s+, KQo, Q8s+, J8s+, T8s+, 98s, 87s, 76s, 65s, 54s",
+                "hero": {
+                    "BB": 10
+                },
+                "villains": [
+                    {
+                        "SB": 22
+                    }
+                ]
+            },
+            {
+                "name": "SB vs 5 bet",
+                "raise": "",
+                "call": "TT+, AQs+, AKo",
+                "hero": {
+                    "SB": 22
+                },
+                "villains": [
+                    {
+                        "BB": 100
+                    }
+                ]
+            }
+        ]
+    }
+]
