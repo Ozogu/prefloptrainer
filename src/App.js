@@ -104,9 +104,13 @@ function App() {
       return;
     }
 
+    const actionWasCorrect = action === correctAction;
+    const streak = actionWasCorrect ? score.currentStreak + 1 : 0;
     setScore((prevScore) => ({
-      correct: prevScore.correct + (correctAction === action ? 1 : 0),
-      incorrect: prevScore.incorrect + (correctAction === action ? 0 : 1),
+      currentStreak: streak,
+      bestStreak: Math.max(streak, prevScore.bestStreak),
+      correct: prevScore.correct + (actionWasCorrect ? 1 : 0),
+      incorrect: prevScore.incorrect + (actionWasCorrect ? 0 : 1),
     }));
 
     addActionToHistory(range, hand, action, correctAction);
@@ -121,7 +125,7 @@ function App() {
 
 
   const [history, setHistory] = useState([]);
-  const [score, setScore] = useState({ correct: 0, incorrect: 0 });
+  const [score, setScore] = useState({ bestStreak: 0, currentStreak: 0, correct: 0, incorrect: 0 });
   const [hoveredRange, setHoveredRange] = useState(null);
   const [selectedRanges, setSelectedRanges] = useState(() => {
     // Load initial state from local storage

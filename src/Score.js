@@ -6,6 +6,8 @@ class Score extends React.Component {
         const { score } = this.props;
         return (
         <div className='score'>
+            <h1 className='bestStreak'>Best streak: {score.bestStreak}</h1>
+            <h1 className='currentStreak'>Current streak: {score.currentStreak}</h1>
             <h1 className='correct'>Correct: {score.correct}</h1>
             <h1 className='incorrect'>Incorrect: {score.incorrect}</h1>
         </div>

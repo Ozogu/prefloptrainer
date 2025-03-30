@@ -19,3 +19,12 @@
   .score .incorrect {
     background-color: var(--red);
   }
+
+  .score .bestStreak {
+    background-color: var(--blue);
+  }
+
+  .score .currentStreak {
+    background-color: var(--yellow);
+  }
+
