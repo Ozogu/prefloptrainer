@@ -161,7 +161,6 @@ function App() {
   const memoizedRandomRange = useMemo(() => getRandomRange(selectedRanges), [selectedRanges, score]);
   const memoizedRandomHand = useMemo(() => getRandomHand(memoizedRandomRange), [selectedRanges, score]);
 
-
   return (
     <div className="app-container">
       <RangeSelector

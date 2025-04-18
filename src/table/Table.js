@@ -39,18 +39,32 @@ const getBets = (hero, villains) => {
 };
 
 /** Helper function to build players with position, bet, and CSS class */
-const buildPlayers = (positions, bets, positionClasses) => {
+const buildPlayers = (positions, bets, positionClasses, playerTypes) => {
   return positions.map((position, index) => ({
     position,
     bet: bets[position] || 0,
     className: `player ${positionClasses[index]}`,
+    outlineClass: playerTypes[position] || "default"
   }));
+};
+
+/** Helper function to get player types */
+const getPlayerTypes = (villains) => {
+  if (!villains) {
+    return {};
+  }
+  return villains.reduce((acc, villain) => {
+    const position = Object.keys(villain)[0];
+    const type = villain.type || "unknown";
+    acc[position] = type;
+    return acc;
+  }, {});
 };
 
 /** Player component to render each player with their bet */
 const Player = ({ player }) => (
   <div className={player.className}>
-    <Circle klass="table-circle" text={player.position} />
+    <Circle klass={`table-circle ${player.outlineClass}`} text={player.position} />
     {player.bet > 0 && (
       <>
         <div className="bet-circle"></div>
@@ -83,9 +97,10 @@ class Table extends React.Component {
 
     // Get bets including defaults
     const bets = getBets(hero, villains);
+    const playerTypes = getPlayerTypes(villains);
 
     // Build players data
-    const players = buildPlayers(rotatedPositions, bets, positionClasses);
+    const players = buildPlayers(rotatedPositions, bets, positionClasses, playerTypes);
 
     return (
       <div className="container">

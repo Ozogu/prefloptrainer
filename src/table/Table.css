@@ -147,3 +147,11 @@
     bottom: -2rem;
     right: 35%;
   }
+
+  .reg {
+    border-color: var(--red);
+  }
+
+  .fish {
+    border-color: var(--light-blue);
+  }
