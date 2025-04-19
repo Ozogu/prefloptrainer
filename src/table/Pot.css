@@ -1,0 +1,19 @@
+.pot-container {
+  position: absolute;
+  top:65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+.pot-container .bet-circle {
+  position: absolute;
+  top: 0;
+  left: -1rem;
+}
+
+.pot-container .bet-text {
+  position: absolute;
+  top: -0.3rem;
+  left: 0.5rem;
+}

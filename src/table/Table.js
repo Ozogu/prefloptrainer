@@ -2,6 +2,8 @@ import React from 'react';
 import './Table.css';
 import Circle from './Circle.js';
 import Card from './Card.js';
+import Board from './Board.js';
+import Pot from './Pot.js';
 
 /** Helper function to rotate positions so that hero is at bottom-right */
 const rotatePositions = (positions, heroPosition) => {
@@ -34,6 +36,13 @@ const getBets = (hero, villains) => {
   if (!bets['BB']) {
     bets['BB'] = 1;
   }
+
+  // Remove bets with value -1
+  Object.keys(bets).forEach((key) => {
+    if (bets[key] === -1) {
+      delete bets[key];
+    }
+  });
 
   return bets;
 };
@@ -76,7 +85,7 @@ const Player = ({ player }) => (
 
 class Table extends React.Component {
   render() {
-    const { hand, hero, villains } = this.props;
+    const { range, hand, hero, villains } = this.props;
 
     // All table positions in order
     const positions = ['UTG', 'HJ', 'CO', 'BTN', 'SB', 'BB'];
@@ -102,6 +111,9 @@ class Table extends React.Component {
     // Build players data
     const players = buildPlayers(rotatedPositions, bets, positionClasses, playerTypes);
 
+    // Get board cards from range if available
+    const boardCards = range && range.board ? range.board : null;
+
     return (
       <div className="container">
         <div className="table">
@@ -110,6 +122,12 @@ class Table extends React.Component {
             <Card card={hand?.[0] ?? null} />
             <Card card={hand?.[1] ?? null} />
           </div>
+
+          {/* Render board cards using the Board component */}
+          <Board cards={boardCards} />
+
+          {/* Render pot */}
+          <Pot amount={range?.pot} />
 
           {/* Render players */}
           {players.map((player) => (
