@@ -131,12 +131,12 @@ function App() {
   }
 
   const addActionToHistory = (range, holeCards, action, correctAction) => {
+    // No need to modify the range object, it already contains the note property
     setHistory(prevHistory => [
       ...prevHistory,
       { range: range, holeCards, action, correctAction }
     ]);
   };
-
 
   const [history, setHistory] = useState([]);
   const [score, setScore] = useState({ bestStreak: 0, currentStreak: 0, correct: 0, incorrect: 0 });

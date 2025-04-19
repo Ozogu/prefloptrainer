@@ -12,22 +12,35 @@ const HoleCards = ({ holeCards }) => (
 );
 
 // Component to render each action item
-const ActionItem = ({ action, onHover }) => (
-  <li
-    className={`item-container ${
-      action.action === action.correctAction ? 'correct' : 'incorrect'
-    }`}
-    onMouseEnter={() => onHover(action.range)}
-    onMouseLeave={() => onHover(null)}
-  >
-    <HoleCards holeCards={action.holeCards} />
-    <div className="text-container">
-      <span>{action.range.name}</span>
-      <span>Action: {action.action}</span>
-      <span>Correct: {action.correctAction}</span>
-    </div>
-  </li>
-);
+const ActionItem = ({ action, onHover }) => {
+  const [showNote, setShowNote] = useState(false);
+
+  return (
+    <li
+      className={`item-container ${
+        action.action === action.correctAction ? 'correct' : 'incorrect'
+      }`}
+      onMouseEnter={() => {
+        onHover(action.range);
+        setShowNote(true);
+      }}
+      onMouseLeave={() => {
+        onHover(null);
+        setShowNote(false);
+      }}
+    >
+      <HoleCards holeCards={action.holeCards} />
+      <div className="text-container">
+        <span>{action.range.name}</span>
+        <span>Action: {action.action}</span>
+        <span>Correct: {action.correctAction}</span>
+      </div>
+      {showNote && action.range.note && (
+        <div className="note-container">{action.range.note}</div>
+      )}
+    </li>
+  );
+};
 
 // Main component
 const ActionHistoryPanel = ({ history, onHover }) => {
