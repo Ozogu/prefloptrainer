@@ -118,7 +118,7 @@ function App() {
 
     const actionWasCorrect = action === correctAction;
     const streak = actionWasCorrect ? score.currentStreak + 1 : 0;
-    console.log(`Action: ${action}, Correct Action: ${correctAction}, Streak: ${streak}`);
+
     setScore((prevScore) => ({
       currentStreak: streak,
       bestStreak: Math.max(streak, prevScore.bestStreak),
@@ -174,6 +174,10 @@ function App() {
   // Memoize the result of getRandomHand based on selectedRanges
   const memoizedRandomRange = useMemo(() => getRandomRange(selectedRanges), [selectedRanges, score]);
   const memoizedRandomHand = useMemo(() => getRandomHand(memoizedRandomRange), [selectedRanges, score]);
+  const memoizedRng = useMemo(() => {
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    return randomNumber;
+  });
 
   return (
     <div className="app-container">
@@ -192,9 +196,10 @@ function App() {
           hand={memoizedRandomHand}
           hero={memoizedRandomRange?.hero ?? null}
           villains={memoizedRandomRange?.villains ?? null}
+          randomNumber={memoizedRng}
         />
         <Score score={score} />
-        <GameButtons hand={memoizedRandomHand} range={memoizedRandomRange} onAction={onAction} />
+        <GameButtons hand={memoizedRandomHand} range={memoizedRandomRange} onAction={onAction} randomNumber={memoizedRng} />
         <RangeTable range={hoveredRange} />
         <RenderClearLocalStorage />
       </div>

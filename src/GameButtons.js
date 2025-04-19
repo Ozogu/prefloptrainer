@@ -70,12 +70,13 @@ const getButtonClass = (option, index) => {
   return `bet${index + 1}`;
 };
 
-const GameButtons = ({ hand, range, onAction }) => {
+const GameButtons = ({ hand, range, onAction, randomNumber }) => {
   const [feedback, setFeedback] = useState({});
   const feedbackIdRef = useRef(0);
   const timeoutRef = useRef(null);
   const handRef = useRef(hand);
   const rangeRef = useRef(range);
+  const rngRef = useRef(randomNumber);
 
   // Update the refs whenever the hand or range props change
   useEffect(() => {
@@ -86,15 +87,23 @@ const GameButtons = ({ hand, range, onAction }) => {
     rangeRef.current = range;
   }, [range]);
 
+  useEffect(() => {
+    rngRef.current = randomNumber;
+  }, [randomNumber]);
+
   const onClick = (action) => {
     // Make sure we have valid references before proceeding
-    if (!handRef.current || !rangeRef.current) {
-      console.warn('Hand or range reference is undefined, cannot determine correct action');
+    if (!handRef.current || !rangeRef.current || !rngRef.current) {
       return;
     }
 
+    // Get a random number between 1 and 100 for frequency-based decisions
     const correctAction = determineCorrectAction(handRef.current, rangeRef.current);
-    const isCorrect = action === correctAction;
+    let isCorrect = action === correctAction;
+    if (isCorrect && range.frequency) {
+      isCorrect = rngRef.current <= range.frequency;
+    }
+
     feedbackIdRef.current += 1;
     const newFeedback = {
       [action]: { type: isCorrect ? 'correct' : 'incorrect', id: feedbackIdRef.current },

@@ -166,3 +166,18 @@
   .fish {
     border-color: var(--light-blue);
   }
+
+  .frequency-indicator {
+    position: absolute;
+    top: 5px;
+    right: 80px;
+    padding: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .random-number {
+    color: #ff9900;
+  }

@@ -119,7 +119,7 @@ const Player = ({ player }) => (
 
 class Table extends React.Component {
   render() {
-    const { range, hand, hero, villains } = this.props;
+    const { range, hand, hero, villains, randomNumber } = this.props;
 
     // All table positions in order
     const positions = ['UTG', 'HJ', 'CO', 'BTN', 'SB', 'BB'];
@@ -161,6 +161,13 @@ class Table extends React.Component {
           <div className="card-container">
             <Card card={cardsToDisplay?.[0] ?? null} />
             <Card card={cardsToDisplay?.[1] ?? null} />
+
+            {/* Display only random number if frequency is defined */}
+            {range && range.frequency && (
+              <div className="frequency-indicator">
+                <span className="random-number">RNG: {randomNumber}</span>
+              </div>
+            )}
           </div>
 
           {/* Render board cards using the Board component */}
