@@ -91,10 +91,10 @@ function UploadRangesModal({ isOpen, onClose, onRangesSubmit }) {
       return;
     }
 
-    if (!validateParsedData(parsedData)) {
-      setErrorMessage('Invalid data structure.');
-      return;
-    }
+    // if (!validateParsedData(parsedData)) {
+    //   setErrorMessage('Invalid data structure.');
+    //   return;
+    // }
 
     // Pass the parsed data back to the parent component
     onRangesSubmit(parsedData);
