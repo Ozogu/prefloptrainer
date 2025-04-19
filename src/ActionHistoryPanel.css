@@ -74,11 +74,21 @@
   padding: 8px;
   border-radius: 4px;
   font-size: 0.9rem;
-  font-style: italic;
   max-width: 200px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   z-index: 1000;
   left: 10px;
-  transform: translateY(-100%);
   pointer-events: none; /* Prevents the tooltip from interfering with mouse events */
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.note-container.top {
+  bottom: 100%;
+  margin-bottom: 5px;
+}
+
+.note-container.bottom {
+  top: 100%;
+  margin-top: 5px;
 }

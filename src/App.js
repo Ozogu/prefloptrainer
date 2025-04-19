@@ -131,10 +131,16 @@ function App() {
   }
 
   const addActionToHistory = (range, holeCards, action, correctAction) => {
-    // No need to modify the range object, it already contains the note property
+    // Create a copy of the range object and add both frequency and RNG
+    const rangeWithFrequency = {
+      ...range,
+      frequency: range.frequency, // Keep existing frequency if present
+      rng: memoizedRng // Always add the random number as RNG
+    };
+
     setHistory(prevHistory => [
       ...prevHistory,
-      { range: range, holeCards, action, correctAction }
+      { range: rangeWithFrequency, holeCards, action, correctAction }
     ]);
   };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './ActionHistoryPanel.css';
 import Card from './table/Card';
 
@@ -14,16 +14,33 @@ const HoleCards = ({ holeCards }) => (
 // Component to render each action item
 const ActionItem = ({ action, onHover }) => {
   const [showNote, setShowNote] = useState(false);
+  const [notePosition, setNotePosition] = useState('top');
+  const itemRef = useRef(null);
+
+  const handleMouseEnter = () => {
+    onHover(action.range);
+    setShowNote(true);
+
+    // Calculate if there's enough space above
+    if (itemRef.current) {
+      const rect = itemRef.current.getBoundingClientRect();
+      const spaceAbove = rect.top;
+      // If space above is less than 100px, show below
+      if (spaceAbove < 100) {
+        setNotePosition('bottom');
+      } else {
+        setNotePosition('top');
+      }
+    }
+  };
 
   return (
     <li
+      ref={itemRef}
       className={`item-container ${
         action.action === action.correctAction ? 'correct' : 'incorrect'
       }`}
-      onMouseEnter={() => {
-        onHover(action.range);
-        setShowNote(true);
-      }}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={() => {
         onHover(null);
         setShowNote(false);
@@ -35,8 +52,13 @@ const ActionItem = ({ action, onHover }) => {
         <span>Action: {action.action}</span>
         <span>Correct: {action.correctAction}</span>
       </div>
-      {showNote && action.range.note && (
-        <div className="note-container">{action.range.note}</div>
+      {showNote && (
+        <div className={`note-container ${notePosition}`}>
+          {action.range.frequency ? (
+            <div className="frequency-info">RNG: {action.range.rng}/{action.range.frequency}</div>
+          ) : null}
+          {action.range.note && <div>{action.range.note}</div>}
+        </div>
       )}
     </li>
   );
