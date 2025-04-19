@@ -134,7 +134,7 @@ function App() {
     // Create a copy of the range object and add both frequency and RNG
     const rangeWithFrequency = {
       ...range,
-      frequency: range.frequency, // Keep existing frequency if present
+      correct: range.correct, // Changed from frequency to correct
       rng: memoizedRng // Always add the random number as RNG
     };
 

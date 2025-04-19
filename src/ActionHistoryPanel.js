@@ -34,6 +34,8 @@ const ActionItem = ({ action, onHover }) => {
     }
   };
 
+  const zipArrays = (arr1, arr2) => arr1.map((item, index) => `${item}:${arr2[index]}`);
+
   return (
     <li
       ref={itemRef}
@@ -54,10 +56,18 @@ const ActionItem = ({ action, onHover }) => {
       </div>
       {showNote && (
         <div className={`note-container ${notePosition}`}>
-          {action.range.frequency ? (
-            <div className="frequency-info">RNG: {action.range.rng}/{action.range.frequency}</div>
-          ) : null}
           {action.range.note && <div>{action.range.note}</div>}
+          {action.range.correct ? (
+            <>
+              <div className="frequency-info">RNG: {action.range.rng}</div>
+              <div>
+                {zipArrays(
+                  action.range.options,
+                  action.range.correct
+                ).join(', ')}
+              </div>
+            </>
+          ) : null}
         </div>
       )}
     </li>
