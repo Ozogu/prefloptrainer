@@ -4,6 +4,7 @@ import Circle from './Circle.js';
 import Card from './Card.js';
 import Board from './Board.js';
 import Pot from './Pot.js';
+import ActionModal from './ActionModal.js';
 
 /** Helper function to rotate positions so that hero is at bottom-right */
 const rotatePositions = (positions, heroPosition) => {
@@ -48,12 +49,13 @@ const getBets = (hero, villains) => {
 };
 
 /** Helper function to build players with position, bet, and CSS class */
-const buildPlayers = (positions, bets, positionClasses, playerTypes) => {
+const buildPlayers = (positions, bets, positionClasses, playerTypes, actionsMap) => {
   return positions.map((position, index) => ({
     position,
     bet: bets[position] || 0,
     className: `player ${positionClasses[index]}`,
-    outlineClass: playerTypes[position] || "default"
+    outlineClass: playerTypes[position] || "default",
+    actions: actionsMap[position] || null
   }));
 };
 
@@ -70,7 +72,32 @@ const getPlayerTypes = (villains) => {
   }, {});
 };
 
-/** Player component to render each player with their bet */
+/** Helper function to extract actions for all players */
+const getActionsMap = (hero, villains) => {
+  const actionsMap = {};
+
+  // Add hero's actions if they exist
+  if (hero && hero.actions) {
+    const position = Object.keys(hero)[0];
+    actionsMap[position] = hero.actions;
+  }
+
+  // Add villains' actions if they exist
+  if (villains && Array.isArray(villains)) {
+    villains.forEach(villain => {
+      if (villain) {
+        const position = Object.keys(villain)[0];
+        if (villain.actions && Array.isArray(villain.actions)) {
+          actionsMap[position] = villain.actions;
+        }
+      }
+    });
+  }
+
+  return actionsMap;
+};
+
+/** Player component to render each player with their bet and actions */
 const Player = ({ player }) => (
   <div className={player.className}>
     <Circle klass={`table-circle ${player.outlineClass}`} text={player.position} />
@@ -79,6 +106,13 @@ const Player = ({ player }) => (
         <div className="bet-circle"></div>
         <div className="bet-text">{player.bet}</div>
       </>
+    )}
+    {player.actions && (
+      <ActionModal
+        actions={player.actions}
+        position={player.position}
+        playerType={player.outlineClass}
+      />
     )}
   </div>
 );
@@ -108,19 +142,25 @@ class Table extends React.Component {
     const bets = getBets(hero, villains);
     const playerTypes = getPlayerTypes(villains);
 
+    // Get actions for all players
+    const actionsMap = getActionsMap(hero, villains);
+
     // Build players data
-    const players = buildPlayers(rotatedPositions, bets, positionClasses, playerTypes);
+    const players = buildPlayers(rotatedPositions, bets, positionClasses, playerTypes, actionsMap);
 
     // Get board cards from range if available
     const boardCards = range && range.board ? range.board : null;
+
+    // Use hand from range if specified
+    const cardsToDisplay = (range && range.hand) ? this.convertHandToCards(range.hand) : hand;
 
     return (
       <div className="container">
         <div className="table">
           {/* Render Hero's hand */}
           <div className="card-container">
-            <Card card={hand?.[0] ?? null} />
-            <Card card={hand?.[1] ?? null} />
+            <Card card={cardsToDisplay?.[0] ?? null} />
+            <Card card={cardsToDisplay?.[1] ?? null} />
           </div>
 
           {/* Render board cards using the Board component */}
@@ -136,6 +176,48 @@ class Table extends React.Component {
         </div>
       </div>
     );
+  }
+
+  /**
+   * Convert a hand notation (e.g., 'AQs', 'T9o', 'KK') or explicit card notation (e.g., 'AdQd') to actual cards
+   * @param {string} hand - Hand notation like 'AQs', 'T9o', 'KK' or explicit cards like 'AdQd'
+   * @returns {Array} Array of two cards [cardA, cardB]
+   */
+  convertHandToCards(handNotation) {
+    if (!handNotation || typeof handNotation !== 'string') {
+      return null;
+    }
+
+    // Case 1: Explicit card notation (e.g., "AdQd")
+    if (handNotation.length === 4) {
+      const card1 = handNotation.substring(0, 2); // First card (e.g., "Ad")
+      const card2 = handNotation.substring(2, 4); // Second card (e.g., "Qd")
+      return [card1, card2];
+    }
+
+    // Case 2: Standard poker notation
+    // Extract rank and suitedness
+    let rank1, rank2, suited;
+    if (handNotation.length === 2) {
+      // Pocket pair
+      rank1 = rank2 = handNotation[0];
+      suited = true;
+    } else if (handNotation.length === 3) {
+      rank1 = handNotation[0];
+      rank2 = handNotation[1];
+      suited = handNotation[2] === 's';
+    } else {
+      return null;
+    }
+
+    // Translate to actual cards
+    const suits = ['s', 'h', 'd', 'c'];
+    const suit1 = suits[0]; // Always use spades for the first card
+
+    // For second card, use same suit for suited hands, different suit for offsuit
+    const suit2 = suited ? suit1 : suits[1];
+
+    return [`${rank1}${suit1}`, `${rank2}${suit2}`];
   }
 }
 
