@@ -20,6 +20,7 @@
   text-align: center;
 }
 
+/* Original button colors */
 .raise {
   background-color: var(--red);
 }
@@ -32,6 +33,40 @@
   background-color: var(--light-grey);
 }
 
+/* New darkening red colors for bets with numbered classes */
+.bet1 {
+  background-color: #e50000; /* Lightest red */
+}
+
+.bet2 {
+  background-color: #d40000; /* Light red */
+}
+
+.bet3 {
+  background-color: #c30000; /* Medium-dark red */
+}
+
+.bet4 {
+  background-color: #b20000; /* Dark red */
+}
+
+.bet5 {
+  background-color: #a10000; /* Darker red */
+}
+
+.bet6 {
+  background-color: #900000; /* Very dark red */
+}
+
+.bet7 {
+  background-color: #800000; /* Extremely dark red */
+}
+
+.bet8 {
+  background-color: #700000; /* Deepest red */
+}
+
+/* Feedback styles */
 .feedback {
   position: absolute;
   top: 50%;

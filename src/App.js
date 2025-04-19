@@ -63,7 +63,19 @@ function App() {
   };
 
   const getRandomHand = (range) => {
-    if (!range || !range.corner) {
+    if (!range) {
+      return null;
+    }
+
+    // Check if the range has a predefined hand
+    if (range.hand) {
+      // Convert hand string like "AdQd" to array format ["Ad", "Qd"]
+      const hand = range.hand;
+      return [hand.substring(0, 2), hand.substring(2, 4)];
+    }
+
+    // Fall back to random hand generation if no predefined hand exists
+    if (!range.corner) {
       return null;
     }
 
@@ -106,6 +118,7 @@ function App() {
 
     const actionWasCorrect = action === correctAction;
     const streak = actionWasCorrect ? score.currentStreak + 1 : 0;
+    console.log(`Action: ${action}, Correct Action: ${correctAction}, Streak: ${streak}`);
     setScore((prevScore) => ({
       currentStreak: streak,
       bestStreak: Math.max(streak, prevScore.bestStreak),
@@ -113,6 +126,7 @@ function App() {
       incorrect: prevScore.incorrect + (actionWasCorrect ? 0 : 1),
     }));
 
+    // Add to action history
     addActionToHistory(range, hand, action, correctAction);
   }
 
