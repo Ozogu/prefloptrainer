@@ -1,0 +1,89 @@
+/* ActionModal.css */
+.action-modal {
+  position: absolute;
+  background-color: rgba(17, 17, 17, 0.9);
+  border-radius: 5px;
+  width: auto; /* Changed from fixed width to auto */
+  max-width: 280px; /* Added max-width to prevent too wide modals */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  color: white;
+  font-size: 0.8rem;
+  pointer-events: none; /* Make it non-interactive */
+}
+
+.action-modal.fish {
+  border-left: 3px solid var(--light-blue);
+}
+
+.action-modal.reg {
+  border-left: 3px solid var(--red);
+}
+
+.action-modal.default {
+  border-left: 3px solid var(--light-grey);
+}
+
+.action-modal-header {
+  padding: 5px 8px;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.action-modal-content {
+  padding: 5px 8px;
+}
+
+/* Remove list styling as we're now using spans */
+.action-modal-content ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* New horizontal layout styles */
+.actions-horizontal {
+  display: flex;
+  flex-wrap: nowrap; /* Changed from wrap to nowrap to ensure single line */
+  justify-content: flex-start;
+  gap: 2px;
+  width: 100%;
+  overflow-x: auto; /* Added to allow scrolling if needed */
+  white-space: nowrap; /* Ensures content stays on one line */
+}
+
+.action-item {
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+
+/* Position modifiers for different player positions */
+.bottom-right .action-modal {
+  top: -50px;
+  right: 0;
+}
+
+.bottom-left .action-modal {
+  top: -50px;
+  left: 0;
+}
+
+.left-side .action-modal {
+  top: 0;
+  left: -130px;
+}
+
+.top-left .action-modal {
+  bottom: -50px;
+  left: 0;
+}
+
+.top-right .action-modal {
+  bottom: -50px;
+  right: 0;
+}
+
+.right-side .action-modal {
+  top: 0;
+  right: -130px;
+}
