@@ -5,6 +5,10 @@ import { parseCornerRange } from './rangeutils';
 import UploadRangesModal from './UploadRangesModal';
 
 const expandRanges = (range) => {
+  if (!range || !range.raise || !range.call) {
+    return range;
+  }
+
   const newRange = { ...range };
   const parsedRaiseRange = parseCornerRange(range.raise);
   const parsedCallRange = parseCornerRange(range.call);

@@ -174,6 +174,7 @@ function App() {
       <div className="main-content">
         <RenderCoffee />
         <Table
+          range={memoizedRandomRange}
           hand={memoizedRandomHand}
           hero={memoizedRandomRange?.hero ?? null}
           villains={memoizedRandomRange?.villains ?? null}
