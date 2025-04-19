@@ -163,7 +163,7 @@ class Table extends React.Component {
             <Card card={cardsToDisplay?.[1] ?? null} />
 
             {/* Display only random number if frequency is defined */}
-            {range && range.frequency && (
+            {range && range.correct && Array.isArray(range.correct) && (
               <div className="frequency-indicator">
                 <span className="random-number">RNG: {randomNumber}</span>
               </div>

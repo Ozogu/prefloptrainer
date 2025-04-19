@@ -60,6 +60,49 @@ const determineCorrectAction = (hand, range) => {
   return 'Fold';
 };
 
+/**
+ * Determines if an action is correct based on a frequency table
+ * @param {string} action - The user's selected action
+ * @param {Array} options - Array of possible actions
+ * @param {Array} correctFrequencies - Array of frequency percentages for each action
+ * @param {number} randomValue - Random number between 0 and 1
+ * @returns {boolean} - Whether the action is correct based on frequency
+ */
+const isCorrectBasedOnFrequency = (action, options, correctFrequencies, randomValue) => {
+  // Find the index of the action in the options array
+  const actionIndex = options.findIndex(
+    opt => opt.toLowerCase() === action.toLowerCase()
+  );
+
+  // If action isn't in options or frequencies array isn't long enough, it's incorrect
+  if (actionIndex === -1 || actionIndex >= correctFrequencies.length) {
+    return false;
+  }
+
+  // Get the frequency for this action
+  const frequency = correctFrequencies[actionIndex];
+
+  // If frequency is 0, action is never correct
+  if (frequency <= 0) {
+    return false;
+  }
+
+  // Generate a random number between 0 and 100
+  const rng = randomValue;
+
+  // Calculate cumulative probabilities
+  let cumulativeProb = 0;
+  for (let i = 0; i <= actionIndex; i++) {
+    cumulativeProb += correctFrequencies[i];
+  }
+
+  const lowerBound = cumulativeProb - correctFrequencies[actionIndex];
+  const upperBound = cumulativeProb;
+
+  // The action is correct if random number falls within the range
+  return rng > lowerBound && rng <= upperBound;
+};
+
 // Helper function to get button style class based on index
 const getButtonClass = (option, index) => {
   // Always use standard classes for call and fold
@@ -97,11 +140,21 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
       return;
     }
 
-    // Get a random number between 1 and 100 for frequency-based decisions
+    // Get the correct action which could be a string or frequency array
     const correctAction = determineCorrectAction(handRef.current, rangeRef.current);
-    let isCorrect = action === correctAction;
-    if (isCorrect && range.frequency) {
-      isCorrect = rngRef.current <= range.frequency;
+    let isCorrect = false;
+
+    if (Array.isArray(correctAction)) {
+      // Handle frequency table format
+      isCorrect = isCorrectBasedOnFrequency(
+        action,
+        rangeRef.current.options,
+        correctAction,
+        rngRef.current
+      );
+    } else {
+      // Traditional single-action comparison
+      isCorrect = action === correctAction;
     }
 
     feedbackIdRef.current += 1;
