@@ -66,6 +66,12 @@
   background-color: #700000; /* Deepest red */
 }
 
+.ghost {
+  background-color: var(--dark-grey);
+  color: var(--dark-grey);
+  border: 1px solid var(--dark-grey);
+}
+
 /* Feedback styles */
 .feedback {
   position: absolute;

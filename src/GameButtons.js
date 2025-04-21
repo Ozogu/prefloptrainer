@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import './GameButtons.css';
 import { isHandInRange, parseRange } from './rangeutils';
 
-const RenderButton = ({ name, onClick, feedback, hotkey, className }) => {
+const RenderButton = ({ name, onClick, feedback, hotkey, className, buttonIndex }) => {
   return (
-    <div className={`button ${className || name.toLowerCase()}`} onClick={() => onClick(name)}>
+    <div className={`button ${className || name.toLowerCase()}`} onClick={() => onClick(name, buttonIndex)}>
       <span>{name} {hotkey ? `(${hotkey})` : ''}</span>
       {feedback && (
         <div className={`feedback ${feedback.type}`} key={feedback.id}>
@@ -134,7 +134,7 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
     rngRef.current = randomNumber;
   }, [randomNumber]);
 
-  const onClick = (action) => {
+  const onClick = (action, buttonIndex) => {
     // Make sure we have valid references before proceeding
     if (!handRef.current || !rangeRef.current || !rngRef.current) {
       return;
@@ -158,13 +158,17 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
     }
 
     feedbackIdRef.current += 1;
+    // Use only the buttonIndex as the key for feedback
     const newFeedback = {
-      [action]: { type: isCorrect ? 'correct' : 'incorrect', id: feedbackIdRef.current },
+      [buttonIndex]: {
+        type: isCorrect ? 'correct' : 'incorrect',
+        id: feedbackIdRef.current
+      },
     };
     setFeedback(newFeedback);
 
     // Pass the original action and correctAction to maintain exact format
-    onAction(rangeRef.current, handRef.current, action, correctAction);
+    onAction(rangeRef.current, handRef.current, action, correctAction, buttonIndex);
 
     // Clear any existing timeout and set a new one
     if (timeoutRef.current) {
@@ -197,11 +201,11 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
 
         // Handle fold/check with key 3
         if (event.key === '3' && foldIndex !== -1) {
-          onClick(options[foldIndex]);
+          onClick(options[foldIndex], foldIndex);
         }
         // Handle call with key 2
         else if (event.key === '2' && callIndex !== -1) {
-          onClick(options[callIndex]);
+          onClick(options[callIndex], callIndex);
         }
         // Handle betting options with their respective keys
         else {
@@ -210,18 +214,18 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
             // Find the original index of the betting option
             const optionIndex = options.indexOf(bettingOptions[keyIndex]);
             if (optionIndex !== -1) {
-              onClick(options[optionIndex]);
+              onClick(options[optionIndex], optionIndex);
             }
           }
         }
       } else {
         // Default key bindings for standard Raise/Call/Fold
         if (event.key === '1') {
-          onClick('Raise');
+          onClick('Raise', 0);
         } else if (event.key === '2') {
-          onClick('Call');
+          onClick('Call', 1);
         } else if (event.key === '3') {
-          onClick('Fold');
+          onClick('Fold', 2);
         }
       }
     };
@@ -261,22 +265,28 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
     <div className="container">
       {hasCustomOptions ? (
         // Render custom buttons based on range.options
-        range.options.slice().reverse().map((option, index) => (
-          <RenderButton
-            key={option}
-            name={option.charAt(0).toUpperCase() + option.slice(1)}
-            onClick={() => onClick(option)}
-            feedback={feedback[option]}
-            hotkey={getHotkey(option, index)}
-            className={getButtonClass(option, index)}
-          />
-        ))
-            ) : (
+        range.options.slice().reverse().map((option, index) => {
+          const buttonIndex = range.options.length - 1 - index;
+          return (
+            <RenderButton
+              key={option}
+              name={option.charAt(0).toUpperCase() + option.slice(1)}
+              onClick={onClick}
+              feedback={feedback[buttonIndex]}
+              hotkey={getHotkey(option, index)}
+              className={getButtonClass(option, index)}
+              buttonIndex={buttonIndex}
+            />
+          );
+        })
+      ) : (
         // Render default buttons
         <>
-          <RenderButton name="Raise" onClick={() => onClick('Raise')} feedback={feedback['Raise']} hotkey="1" />
-          <RenderButton name="Call" onClick={() => onClick('Call')} feedback={feedback['Call']} hotkey="2" />
-          <RenderButton name="Fold" onClick={() => onClick('Fold')} feedback={feedback['Fold']} hotkey="3" />
+          <RenderButton name="" onClick={onClick} feedback={feedback[3]} hotkey="4" buttonIndex={3} className={"ghost"} />
+          <RenderButton name="Raise" onClick={onClick} feedback={feedback[0]} hotkey="1" buttonIndex={0} />
+          <RenderButton name="Call" onClick={onClick} feedback={feedback[1]} hotkey="2" buttonIndex={1} />
+          <RenderButton name="Fold" onClick={onClick} feedback={feedback[2]} hotkey="3" buttonIndex={2} />
+          <RenderButton name="" onClick={onClick} feedback={feedback[3]} hotkey="99" buttonIndex={99} className={"ghost"} />
         </>
       )}
     </div>
