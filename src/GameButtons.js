@@ -261,7 +261,7 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
     <div className="container">
       {hasCustomOptions ? (
         // Render custom buttons based on range.options
-        range.options.map((option, index) => (
+        range.options.slice().reverse().map((option, index) => (
           <RenderButton
             key={option}
             name={option.charAt(0).toUpperCase() + option.slice(1)}
@@ -271,7 +271,7 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
             className={getButtonClass(option, index)}
           />
         ))
-      ) : (
+            ) : (
         // Render default buttons
         <>
           <RenderButton name="Raise" onClick={() => onClick('Raise')} feedback={feedback['Raise']} hotkey="1" />
