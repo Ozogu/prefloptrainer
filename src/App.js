@@ -69,9 +69,43 @@ function App() {
 
     // Check if the range has a predefined hand
     if (range.hand) {
-      // Convert hand string like "AdQd" to array format ["Ad", "Qd"]
       const hand = range.hand;
+      const suits = ['c', 'd', 'h', 's'];
+
+      const getRandomSuits = (isSuited) => {
+      const randomSuit1 = suits[Math.floor(Math.random() * suits.length)];
+      if (isSuited) {
+        return [randomSuit1, randomSuit1];
+      }
+      let randomSuit2;
+      do {
+        randomSuit2 = suits[Math.floor(Math.random() * suits.length)];
+      } while (randomSuit2 === randomSuit1);
+      return [randomSuit1, randomSuit2];
+      };
+
+      // Handle suited hands like "AQs"
+      if (hand.length === 3 && hand[2] === 's') {
+      const [suit] = getRandomSuits(true);
+      return [`${hand[0]}${suit}`, `${hand[1]}${suit}`];
+      }
+
+      // Handle offsuit hands like "AQo"
+      if (hand.length === 3 && hand[2] === 'o') {
+      const [suit1, suit2] = getRandomSuits(false);
+      return [`${hand[0]}${suit1}`, `${hand[1]}${suit2}`];
+      }
+
+      // Handle exact hands like "AdQd"
+      if (hand.length === 4) {
       return [hand.substring(0, 2), hand.substring(2, 4)];
+      }
+
+      // Handle pocket pairs like "44"
+      if (hand.length === 2 && hand[0] === hand[1]) {
+      const [suit1, suit2] = getRandomSuits(false);
+      return [`${hand[0]}${suit1}`, `${hand[1]}${suit2}`];
+      }
     }
 
     // Fall back to random hand generation if no predefined hand exists
