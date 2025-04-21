@@ -178,14 +178,44 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      // If we have custom options, use different key bindings
+      // Map keys to actions based on the specified requirements
       if (range && range.options && range.options.length > 0) {
-        const numKey = parseInt(event.key);
-        if (!isNaN(numKey) && numKey > 0 && numKey <= range.options.length) {
-          onClick(range.options[numKey - 1]);
+        const options = range.options;
+
+        // Find fold/check, call and betting options
+        const foldIndex = options.findIndex(opt =>
+          opt.toLowerCase() === 'fold' || opt.toLowerCase() === 'check');
+        const callIndex = options.findIndex(opt =>
+          opt.toLowerCase() === 'call');
+
+        // Get betting options (anything that's not fold/check or call)
+        const bettingOptions = options.filter((opt, idx) =>
+          idx !== foldIndex && idx !== callIndex);
+
+        // Betting keys in order: 1, 6, 5, 4, 9, 8, 7
+        const bettingKeys = ['1', '6', '5', '4', '9', '8', '7'];
+
+        // Handle fold/check with key 3
+        if (event.key === '3' && foldIndex !== -1) {
+          onClick(options[foldIndex]);
+        }
+        // Handle call with key 2
+        else if (event.key === '2' && callIndex !== -1) {
+          onClick(options[callIndex]);
+        }
+        // Handle betting options with their respective keys
+        else {
+          const keyIndex = bettingKeys.indexOf(event.key);
+          if (keyIndex !== -1 && keyIndex < bettingOptions.length) {
+            // Find the original index of the betting option
+            const optionIndex = options.indexOf(bettingOptions[keyIndex]);
+            if (optionIndex !== -1) {
+              onClick(options[optionIndex]);
+            }
+          }
         }
       } else {
-        // Default key bindings
+        // Default key bindings for standard Raise/Call/Fold
         if (event.key === '1') {
           onClick('Raise');
         } else if (event.key === '2') {
@@ -205,6 +235,28 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
   // Check if the range has custom options
   const hasCustomOptions = range && range.options && range.options.length > 0;
 
+  // Helper function to determine the hotkey for a given option
+  const getHotkey = (option, index) => {
+    if (option.toLowerCase() === 'fold' || option.toLowerCase() === 'check') {
+      return '3';
+    } else if (option.toLowerCase() === 'call') {
+      return '2';
+    } else {
+      // Betting options get assigned keys in this order
+      const bettingKeys = ['1', '6', '5', '4', '9', '8', '7'];
+
+      // Find the index among betting options
+      const bettingOptions = range.options.filter(opt =>
+        opt.toLowerCase() !== 'fold' &&
+        opt.toLowerCase() !== 'check' &&
+        opt.toLowerCase() !== 'call');
+
+      const bettingIndex = bettingOptions.indexOf(option);
+
+      return bettingIndex >= 0 && bettingIndex < bettingKeys.length ? bettingKeys[bettingIndex] : '';
+    }
+  };
+
   return (
     <div className="container">
       {hasCustomOptions ? (
@@ -215,7 +267,7 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
             name={option.charAt(0).toUpperCase() + option.slice(1)}
             onClick={() => onClick(option)}
             feedback={feedback[option]}
-            hotkey={`${index + 1}`}
+            hotkey={getHotkey(option, index)}
             className={getButtonClass(option, index)}
           />
         ))
