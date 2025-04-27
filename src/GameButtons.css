@@ -70,6 +70,9 @@
   background-color: var(--dark-grey);
   color: var(--dark-grey);
   border: 1px solid var(--dark-grey);
+  transition: none;
+  pointer-events: none;
+  cursor: default;
 }
 
 /* Feedback styles */

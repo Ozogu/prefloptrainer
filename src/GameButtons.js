@@ -3,9 +3,15 @@ import './GameButtons.css';
 import { isHandInRange, parseRange } from './rangeutils';
 
 const RenderButton = ({ name, onClick, feedback, hotkey, className, buttonIndex }) => {
+  // Check if this is a ghost button
+  const isGhost = name.toLowerCase().includes('ghost');
+
+  // Only apply onClick handler if this is not a ghost button
+  const handleClick = isGhost ? undefined : () => onClick(name, buttonIndex);
+
   return (
-    <div className={`button ${className || name.toLowerCase()}`} onClick={() => onClick(name, buttonIndex)}>
-      <span>{name} {hotkey ? `(${hotkey})` : ''}</span>
+    <div className={`button ${className || name.toLowerCase()}`} onClick={handleClick}>
+      <span>{name} {!isGhost && hotkey ? `(${hotkey})` : ''}</span>
       {feedback && (
         <div className={`feedback ${feedback.type}`} key={feedback.id}>
           {feedback.type}
@@ -46,18 +52,18 @@ const determineCorrectAction = (hand, range) => {
   if (range !== null && range.raise) {
     const r = parseRange(range.raise);
     if (isHandInRange(r, hand)) {
-      return 'Raise';
+      return 'raise';
     }
   }
 
   if (range !== null && range.call) {
     const r = parseRange(range.call);
     if (isHandInRange(r, hand)) {
-      return 'Call';
+      return 'call';
     }
   }
 
-  return 'Fold';
+  return 'fold';
 };
 
 /**
@@ -105,12 +111,20 @@ const isCorrectBasedOnFrequency = (action, options, correctFrequencies, randomVa
 
 // Helper function to get button style class based on index
 const getButtonClass = (option, index) => {
-  // Always use standard classes for call and fold
-  if (option.toLowerCase() === 'call') return 'call';
-  if (option.toLowerCase() === 'fold') return 'fold';
+  let baseClass = '';
 
+  // Always use standard classes for call and fold
+  if (option.toLowerCase() === 'call') baseClass = 'call';
+  else if (option.toLowerCase() === 'fold') baseClass = 'fold';
   // For betting options, use bet1, bet2, bet3, etc. based on index
-  return `bet${index + 1}`;
+  else baseClass = `bet${index + 1}`;
+
+  // Add 'ghost' class if the option name contains 'ghost'
+  if (option.toLowerCase().includes('ghost')) {
+    return `${baseClass} ghost`;
+  }
+
+  return baseClass;
 };
 
 const GameButtons = ({ hand, range, onAction, randomNumber }) => {
@@ -120,6 +134,9 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
   const handRef = useRef(hand);
   const rangeRef = useRef(range);
   const rngRef = useRef(randomNumber);
+
+  // Define default options if range.options is not available
+  const options = (range && range.options) ? range.options : ["fold", "call", "raise", "ghost1"];
 
   // Update the refs whenever the hand or range props change
   useEffect(() => {
@@ -183,17 +200,18 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
   useEffect(() => {
     const handleKeyDown = (event) => {
       // Map keys to actions based on the specified requirements
-      if (range && range.options && range.options.length > 0) {
-        const options = range.options;
+      if (options && options.length > 0) {
+        // Filter out ghost options before mapping keys
+        const nonGhostOptions = options.filter(opt => !opt.toLowerCase().includes('ghost'));
 
         // Find fold/check, call and betting options
-        const foldIndex = options.findIndex(opt =>
+        const foldIndex = nonGhostOptions.findIndex(opt =>
           opt.toLowerCase() === 'fold' || opt.toLowerCase() === 'check');
-        const callIndex = options.findIndex(opt =>
+        const callIndex = nonGhostOptions.findIndex(opt =>
           opt.toLowerCase() === 'call');
 
         // Get betting options (anything that's not fold/check or call)
-        const bettingOptions = options.filter((opt, idx) =>
+        const bettingOptions = nonGhostOptions.filter((opt, idx) =>
           idx !== foldIndex && idx !== callIndex);
 
         // Betting keys in order: 1, 6, 5, 4, 9, 8, 7
@@ -201,20 +219,28 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
 
         // Handle fold/check with key 3
         if (event.key === '3' && foldIndex !== -1) {
-          onClick(options[foldIndex], foldIndex);
+          // Find the original index in the full options array
+          const originalIndex = options.indexOf(nonGhostOptions[foldIndex]);
+          if (originalIndex !== -1) {
+            onClick(options[originalIndex], originalIndex);
+          }
         }
         // Handle call with key 2
         else if (event.key === '2' && callIndex !== -1) {
-          onClick(options[callIndex], callIndex);
+          // Find the original index in the full options array
+          const originalIndex = options.indexOf(nonGhostOptions[callIndex]);
+          if (originalIndex !== -1) {
+            onClick(options[originalIndex], originalIndex);
+          }
         }
         // Handle betting options with their respective keys
         else {
           const keyIndex = bettingKeys.indexOf(event.key);
           if (keyIndex !== -1 && keyIndex < bettingOptions.length) {
             // Find the original index of the betting option
-            const optionIndex = options.indexOf(bettingOptions[keyIndex]);
-            if (optionIndex !== -1) {
-              onClick(options[optionIndex], optionIndex);
+            const originalIndex = options.indexOf(bettingOptions[keyIndex]);
+            if (originalIndex !== -1) {
+              onClick(options[originalIndex], originalIndex);
             }
           }
         }
@@ -234,10 +260,7 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [range]);
-
-  // Check if the range has custom options
-  const hasCustomOptions = range && range.options && range.options.length > 0;
+  }, [options]);
 
   // Helper function to determine the hotkey for a given option
   const getHotkey = (option, index) => {
@@ -250,7 +273,7 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
       const bettingKeys = ['1', '6', '5', '4', '9', '8', '7'];
 
       // Find the index among betting options
-      const bettingOptions = range.options.filter(opt =>
+      const bettingOptions = options.filter(opt =>
         opt.toLowerCase() !== 'fold' &&
         opt.toLowerCase() !== 'check' &&
         opt.toLowerCase() !== 'call');
@@ -263,32 +286,21 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
 
   return (
     <div className="container">
-      {hasCustomOptions ? (
-        // Render custom buttons based on range.options
-        range.options.slice().reverse().map((option, index) => {
-          const buttonIndex = range.options.length - 1 - index;
+        {options.slice().reverse().map((option, index) => {
+          const buttonIndex = options.length - 1 - index;
+          const isGhost = option.toLowerCase().includes('ghost');
           return (
             <RenderButton
               key={option}
               name={option.charAt(0).toUpperCase() + option.slice(1)}
-              onClick={onClick}
+              onClick={isGhost ? undefined : onClick}
               feedback={feedback[buttonIndex]}
-              hotkey={getHotkey(option, index)}
+              hotkey={isGhost ? '' : getHotkey(option, index)}
               className={getButtonClass(option, index)}
               buttonIndex={buttonIndex}
             />
           );
-        })
-      ) : (
-        // Render default buttons
-        <>
-          <RenderButton name="" onClick={onClick} feedback={feedback[3]} hotkey="4" buttonIndex={3} className={"ghost"} />
-          <RenderButton name="Raise" onClick={onClick} feedback={feedback[0]} hotkey="1" buttonIndex={0} />
-          <RenderButton name="Call" onClick={onClick} feedback={feedback[1]} hotkey="2" buttonIndex={1} />
-          <RenderButton name="Fold" onClick={onClick} feedback={feedback[2]} hotkey="3" buttonIndex={2} />
-          <RenderButton name="" onClick={onClick} feedback={feedback[3]} hotkey="99" buttonIndex={99} className={"ghost"} />
-        </>
-      )}
+        })}
     </div>
   );
 };
