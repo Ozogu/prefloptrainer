@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/prefloptrainer/static/css/main.03512380.css",
-    "main.js": "/prefloptrainer/static/js/main.945404e9.js",
+    "main.css": "/prefloptrainer/static/css/main.eeaa5e67.css",
+    "main.js": "/prefloptrainer/static/js/main.e4e4ead7.js",
     "static/js/787.2072f51f.chunk.js": "/prefloptrainer/static/js/787.2072f51f.chunk.js",
     "index.html": "/prefloptrainer/index.html",
-    "main.03512380.css.map": "/prefloptrainer/static/css/main.03512380.css.map",
-    "main.945404e9.js.map": "/prefloptrainer/static/js/main.945404e9.js.map",
+    "main.eeaa5e67.css.map": "/prefloptrainer/static/css/main.eeaa5e67.css.map",
+    "main.e4e4ead7.js.map": "/prefloptrainer/static/js/main.e4e4ead7.js.map",
     "787.2072f51f.chunk.js.map": "/prefloptrainer/static/js/787.2072f51f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.03512380.css",
-    "static/js/main.945404e9.js"
+    "static/css/main.eeaa5e67.css",
+    "static/js/main.e4e4ead7.js"
   ]
 }
