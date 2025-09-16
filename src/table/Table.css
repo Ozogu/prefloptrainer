@@ -79,6 +79,96 @@
     right: 0.5rem;
   }
 
+  .big-bottom-left {
+    left: 20%;
+    bottom: -2rem;
+  }
+
+  .big-bottom-left .bet-circle {
+    top: -1rem;
+    right: 2rem;
+  }
+
+  .big-bottom-left .bet-text {
+    top: -1.3rem;
+    right: 0.5rem;
+  }
+
+  .big-bottom-right {
+    right: 20%;
+    bottom: -2rem;
+  }
+
+  .big-bottom-right .bet-circle {
+    top: -1rem;
+    left: 2rem;
+  }
+
+  .big-bottom-right .bet-text {
+    top: -1.3rem;
+    left: 3.2rem;
+  }
+
+  .big-bottom-mid {
+    bottom: -2rem;
+    left: 45%;
+  }
+
+  .big-bottom-mid .bet-circle {
+    top: -1rem;
+    left: 2rem;
+  }
+
+  .big-bottom-mid .bet-text {
+    top: -1.3rem;
+    left: 3.2rem;
+  }
+
+  .big-top-left {
+    left: 20%;
+    top: -2rem;
+  }
+
+  .big-top-left .bet-circle {
+    bottom: -1rem;
+    right: 2rem;
+  }
+
+  .big-top-left .bet-text {
+    bottom: -1.2rem;
+    right: 3.2rem;
+  }
+
+  .big-top-right {
+    right: 20%;
+    top: -2rem;
+  }
+
+  .big-top-right .bet-circle {
+    bottom: -1rem;
+    left: 2rem;
+  }
+
+  .big-top-right .bet-text {
+    bottom: -1.2rem;
+    left: 3.2rem;
+  }
+
+  .big-top-mid {
+    top: -2rem;
+    left: 45%;
+  }
+
+  .big-top-mid .bet-circle {
+    bottom: -1rem;
+    left: 2rem;
+  }
+
+  .big-top-mid .bet-text {
+    bottom: -1.2rem;
+    left: 3.2rem;
+  }
+
   /* Left-side player */
   .left-side {
     left: -2rem;
@@ -146,6 +236,7 @@
     display: flex;
     bottom: -2rem;
     right: 35%;
+    z-index: 100;
   }
 
   /* Board cards container styling */

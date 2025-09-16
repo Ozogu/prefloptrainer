@@ -7,8 +7,8 @@ import Pot from './Pot.js';
 import ActionModal from './ActionModal.js';
 
 /** Helper function to rotate positions so that hero is at bottom-right */
-const rotatePositions = (positions, heroPosition) => {
-  const heroIndex = positions.indexOf(heroPosition);
+const rotatePositions = (positions, heroPosition, offset = 0) => {
+  const heroIndex = positions.indexOf(heroPosition) + offset;
   return positions.slice(heroIndex).concat(positions.slice(0, heroIndex));
 };
 
@@ -36,6 +36,9 @@ const getBets = (hero, villains) => {
   }
   if (!bets['BB']) {
     bets['BB'] = 1;
+  }
+  if (!bets['STR']) {
+    bets['STR'] = 2;
   }
 
   // Remove bets with value -1
@@ -119,24 +122,43 @@ const Player = ({ player }) => (
 
 class Table extends React.Component {
   render() {
-    const { range, hand, hero, villains, randomNumber } = this.props;
+    const { range, hand, hero, villains, playerCount, randomNumber } = this.props;
 
-    // All table positions in order
-    const positions = ['UTG', 'HJ', 'CO', 'BTN', 'SB', 'BB'];
+    let positions = [];
+    let positionClasses = [];
+    let heroOffset = 0;
 
-    // Corresponding CSS classes for positioning
-    const positionClasses = [
-      'bottom-right',
-      'bottom-left',
-      'left-side',
-      'top-left',
-      'top-right',
-      'right-side',
-    ];
+    if (playerCount == 6) {
+      // All table positions in order
+      positions = ['UTG', 'HJ', 'CO', 'BTN', 'SB', 'BB'];
+
+      // Corresponding CSS classes for positioning
+      positionClasses = [
+        'bottom-right',
+        'bottom-left',
+        'left-side',
+        'top-left',
+        'top-right',
+        'right-side',
+      ];
+    } else if (playerCount == 8) {
+      positions = ['UTG', 'LJ', 'HJ', 'CO', 'BTN', 'SB', 'BB', 'STR'];
+      positionClasses = [
+        'big-bottom-right',
+        'big-bottom-mid',
+        'big-bottom-left',
+        'left-side',
+        'big-top-left',
+        'big-top-mid',
+        'big-top-right',
+        'right-side',
+      ];
+      heroOffset = -1; // Adjust offset for 8-max tables
+    }
 
     // Get hero's position and rotate positions array
     const heroPosition = (hero && typeof hero === 'object' && Object.keys(hero).length > 0) ? Object.keys(hero)[0] : "UTG";
-    const rotatedPositions = rotatePositions(positions, heroPosition);
+    const rotatedPositions = rotatePositions(positions, heroPosition, heroOffset);
 
     // Get bets including defaults
     const bets = getBets(hero, villains);

@@ -236,6 +236,7 @@ function App() {
           hand={memoizedRandomHand}
           hero={memoizedRandomRange?.hero ?? null}
           villains={memoizedRandomRange?.villains ?? null}
+          playerCount={memoizedRandomRange?.playerCount ?? 6}
           randomNumber={memoizedRng}
         />
         <Score score={score} />
