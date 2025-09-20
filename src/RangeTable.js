@@ -1,5 +1,5 @@
 import React from 'react';
-import { cards, handRangeType } from './rangeutils.js';
+import { cards, handRangeType, rangeCombos } from './rangeutils.js';
 import './RangeTable.css';
 
 const RenderCell = ({ cell, range, isBold }) => {
@@ -46,6 +46,16 @@ const RenderHighlightButton = ({ onClick, isBold }) => {
   );
 };
 
+const RenderRangePercentage = ({ name, range }) => {
+  const combos = rangeCombos(range);
+  const percentage = ((combos / 1326) * 100).toFixed(2);
+  return (
+    <div className="range-percentage">
+      <span>{name}: {percentage}% ({combos})</span>
+    </div>
+  );
+};
+
 class RangeTable extends React.Component {
   constructor(props) {
     super(props);
@@ -61,10 +71,19 @@ class RangeTable extends React.Component {
   render() {
     const { range } = this.props;
     const { isBold } = this.state;
+    console.log(range)
 
     return (
       <div className='range-table-container'>
-        <RenderTable range={range} isBold={isBold} />
+          {range ? (
+            <>
+              <RenderTable range={range} isBold={isBold} />
+              <RenderRangePercentage name="Raise" range={range.raise ? range.raise : null} />
+              <RenderRangePercentage name="Call" range={range.call ? range.call : null} />
+            </>
+          ) : (
+            <div></div>
+          )}
           <RenderHighlightButton onClick={this.toggleBold} isBold={isBold} />
       </div>
     );

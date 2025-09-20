@@ -14,6 +14,33 @@ export const cards = [
     "A2o", "K2o", "Q2o", "J2o", "T2o", "92o", "82o", "72o", "62o", "52o", "42o", "32o", "22"
 ];
 
+export const rangeCombos = (range) => {
+    if (range === null) {
+        return 0;
+    }
+
+    console.log(range)
+    range = parseRange(range);
+    console.log(range);
+
+    let rangeCombos = 0
+    for (let i = 0; i < range.length; i++) {
+        const hand = range[i];
+        let combos = 0;
+        if (hand.length === 2) {
+            combos += 6; // Pocket pairs
+        } else if (hand[2] === 's') {
+            combos += 4; // Suited hands
+        } else {
+            combos += 12; // Offsuit hands
+        }
+        rangeCombos += combos;
+        console.log(hand, combos, rangeCombos);
+    }
+
+    return rangeCombos;
+}
+
 export const handRangeType = (range, hand) => {
     if (range === null) {
         return 'none';
@@ -90,8 +117,9 @@ function expandPlus(rangeStr) {
       const firstCard = startRank[0];
       const secondCard = startRank[1];
       const startIndex = cardRanks.indexOf(secondCard);
+      const endIndex = cardRanks.indexOf(firstCard);
 
-      for (let i = startIndex; i < cardRanks.length; i++) {
+      for (let i = startIndex; i < endIndex; i++) {
         expandedRange.push(`${firstCard}${cardRanks[i]}${handType}`);
       }
     } else {
