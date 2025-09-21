@@ -45,11 +45,12 @@
   /* Positioning for each player */
   .player {
     position: absolute;
+    display: flex;
   }
 
   /* Bottom-right player */
   .bottom-right {
-    right: 25%;
+    right: 12%;
     bottom: -2rem;
   }
 
@@ -232,11 +233,7 @@
   }
 
   .card-container {
-    position: absolute;
     display: flex;
-    bottom: -2rem;
-    right: 35%;
-    z-index: 100;
   }
 
   /* Board cards container styling */

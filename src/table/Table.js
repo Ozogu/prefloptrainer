@@ -101,7 +101,7 @@ const getActionsMap = (hero, villains) => {
 };
 
 /** Player component to render each player with their bet and actions */
-const Player = ({ player }) => (
+const Player = ({ player, index, cardsToDisplay, range, randomNumber }) => (
   <div className={player.className}>
     <Circle klass={`table-circle ${player.outlineClass}`} text={player.position} />
     {player.bet > 0 && (
@@ -116,6 +116,26 @@ const Player = ({ player }) => (
         position={player.position}
         playerType={player.outlineClass}
       />
+    )}
+
+    {index === 0 ? (
+        <div>
+        {/* Render Hero's hand */}
+        <div className="card-container">
+        <Card card={cardsToDisplay?.[0] ?? null} />
+        <Card card={cardsToDisplay?.[1] ?? null} />
+
+        {/* Display only random number if frequency is defined */}
+        {range && range.correct && Array.isArray(range.correct) && (
+            <div className="frequency-indicator">
+            <span className="random-number">RNG: {randomNumber}</span>
+            </div>
+        )}
+        </div>
+        </div>
+    ) :
+    (
+        <div></div>
     )}
   </div>
 );
@@ -179,19 +199,6 @@ class Table extends React.Component {
     return (
       <div className="container">
         <div className="table">
-          {/* Render Hero's hand */}
-          <div className="card-container">
-            <Card card={cardsToDisplay?.[0] ?? null} />
-            <Card card={cardsToDisplay?.[1] ?? null} />
-
-            {/* Display only random number if frequency is defined */}
-            {range && range.correct && Array.isArray(range.correct) && (
-              <div className="frequency-indicator">
-                <span className="random-number">RNG: {randomNumber}</span>
-              </div>
-            )}
-          </div>
-
           {/* Render board cards using the Board component */}
           <Board cards={boardCards} />
 
@@ -199,8 +206,15 @@ class Table extends React.Component {
           <Pot amount={range?.pot} />
 
           {/* Render players */}
-          {players.map((player) => (
-            <Player key={player.position} player={player} />
+          {players.map((player, index) => (
+            <Player
+              key={player.position}
+              player={player}
+              index={index + heroOffset} // Adjust index for hero offset
+              cardsToDisplay={cardsToDisplay}
+              range={range}
+              randomNumber={randomNumber}
+            />
           ))}
         </div>
       </div>
