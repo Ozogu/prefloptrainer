@@ -157,6 +157,8 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
       return;
     }
 
+    action = action.toLowerCase();
+
     // Get the correct action which could be a string or frequency array
     const correctAction = determineCorrectAction(handRef.current, rangeRef.current);
     let isCorrect = false;
@@ -247,11 +249,11 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
       } else {
         // Default key bindings for standard Raise/Call/Fold
         if (event.key === '1') {
-          onClick('Raise', 0);
+          onClick('raise', 0);
         } else if (event.key === '2') {
-          onClick('Call', 1);
+          onClick('call', 1);
         } else if (event.key === '3') {
-          onClick('Fold', 2);
+          onClick('fold', 2);
         }
       }
     };
