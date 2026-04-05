@@ -41,6 +41,23 @@ export const rangeCombos = (range) => {
     return rangeCombos;
 }
 
+/**
+ * Rounds a single frequency value to the display/game buckets:
+ * 0 stays 0; (0, 0.25) -> 0.25; >=0.25 -> nearest of 0.25, 0.50, 0.75, 1.0.
+ * The three resulting values are then renormalized to sum to 1.
+ */
+export const roundMixedFreqs = (freqs) => {
+    const roundOne = (f) => {
+        if (f <= 0) return 0;
+        if (f < 0.25) return 0.25;
+        return Math.round(f * 4) / 4;
+    };
+    const rounded = freqs.map(roundOne);
+    const sum = rounded.reduce((a, b) => a + b, 0);
+    if (sum === 0) return [0, 0, 1];
+    return rounded.map(v => v / sum);
+};
+
 export const handRangeType = (range, hand) => {
     if (range === null) {
         return 'none';
@@ -51,6 +68,12 @@ export const handRangeType = (range, hand) => {
         if (isHandInRange(range.corner, hand)) {
             retval += 'corner ';
         }
+    }
+
+    // Mixed strategy: return object with rounded frequencies so RangeTable can draw gradient fill
+    if (range.mixed && range.mixed[hand]) {
+        const [raiseFreq, callFreq, foldFreq] = roundMixedFreqs(range.mixed[hand]);
+        return { type: 'mixed', raise: raiseFreq, call: callFreq, fold: foldFreq };
     }
 
     if (range.raise) {

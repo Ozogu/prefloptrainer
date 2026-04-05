@@ -4,8 +4,27 @@ import './RangeTable.css';
 
 const RenderCell = ({ cell, range, isBold }) => {
   const rangeType = handRangeType(range, cell);
-  const className = `${rangeType} ${isBold ? 'bold' : ''}`;
 
+  // Mixed strategy: render gradient fill proportional to raise/call/fold frequencies
+  if (rangeType && typeof rangeType === 'object' && rangeType.type === 'mixed') {
+    const { raise, call, fold } = rangeType;
+    const raisePct = (raise * 100).toFixed(2);
+    const callPct = (call * 100).toFixed(2);
+    // Gradient: raise (red) | call (green) | fold (dark/transparent)
+    const gradient = `linear-gradient(to right, var(--red) ${raisePct}%, var(--green) ${raisePct}%, var(--green) ${(raise + call) * 100}%, transparent ${(raise + call) * 100}%)`;
+    const cornerClass = isBold && range && range.corner && range.corner.includes && range.corner.includes(cell) ? ' bold corner' : '';
+    return (
+      <td
+        className={`mixed${cornerClass}`}
+        style={{ background: gradient, color: 'white' }}
+        title={`R:${(raise * 100).toFixed(0)}% C:${(call * 100).toFixed(0)}% F:${(fold * 100).toFixed(0)}%`}
+      >
+        {cell}
+      </td>
+    );
+  }
+
+  const className = `${typeof rangeType === 'string' ? rangeType : 'none'} ${isBold ? 'bold' : ''}`;
   return <td className={className}>{cell}</td>;
 }
 

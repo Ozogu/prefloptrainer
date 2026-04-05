@@ -1,0 +1,1294 @@
+[
+    {
+        "RFI": [
+            {
+                "name": "UTG RFI",
+                "raise": "44+, A2s+, ATo+, K6s+, KTo+, Q9s+, QJo, J9s+, T8s+, 98s, 87s, 76s, 65s, 54s",
+                "call": "",
+                "hero": {
+                    "UTG": 0
+                },
+                "villains": [
+                    {}
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "LJ RFI",
+                "raise": "33+, A2s+, A9o+, K5s+, KTo+, Q8s+, QTo+, J8s+, T8s+, 98s, 87s, 76s, 65s, 54s",
+                "call": "",
+                "hero": {
+                    "LJ": 0
+                },
+                "villains": [
+                    {}
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "HJ RFI",
+                "raise": "22+, A2s+, A8o+, K3s+, KTo+, Q6s+, QTo+, J8s+, JTo, T7s+, 97s+, 86s+, 75s+, 65s, 54s",
+                "call": "",
+                "hero": {
+                    "HJ": 0
+                },
+                "villains": [
+                    {}
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "CO RFI",
+                "raise": "22+, A2s+, A7o+, A5o, K2s+, K9o+, Q4s+, QTo+, J7s+, J9o+, T7s+, T9o, 96s+, 86s+, 75s+, 64s+, 54s",
+                "call": "",
+                "hero": {
+                    "CO": 0
+                },
+                "villains": [
+                    {}
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BTN RFI",
+                "raise": "22+, A2s+, A2o+, K2s+, K6o+, Q2s+, Q8o+, J3s+, J8o+, T5s+, T8o+, 95s+, 98o, 85s+, 75s+, 64s+, 53s+, 43s",
+                "call": "",
+                "hero": {
+                    "BTN": 0
+                },
+                "villains": [
+                    {}
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "SB RFI",
+                "raise": "22+, A2s+, A3o+, K2s+, K8o+, Q2s+, Q8o+, J3s+, J8o+, T5s+, T8o+, 96s+, 98o, 85s+, 75s+, 64s+, 54s",
+                "call": "",
+                "hero": {
+                    "SB": 0.5
+                },
+                "villains": [
+                    {}
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB RFI",
+                "raise": "",
+                "call": "22+, A2s+, A2o+, K2s+, K2o+, Q2s+, Q2o+, J2s+, J2o+, T2s+, T2o+, 92s+, 92o+, 82s+, 82o+, 72s+, 72o+, 62s+, 62o+, 52s+, 52o+, 42s+, 42o+, 32s, 32o",
+                "hero": {
+                    "BB": 1
+                },
+                "villains": [
+                    {}
+                ],
+                "playerCount": 8
+            }
+        ]
+    },
+    {
+        "LJ HJ CO BTN vs. RFI": [
+            {
+                "name": "LJ vs UTG RFI",
+                "raise": "QQ+, AKs, ATs-A8s, A5s-A4s, AQo, KTs+, QTs+, JTs, 65s, 54s",
+                "call": "JJ-66, AQs-AJs, A7s, A3s, AKo, T9s",
+                "hero": {
+                    "LJ": 0
+                },
+                "villains": [
+                    {
+                        "UTG": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "HJ vs UTG RFI",
+                "raise": "QQ+, AKs, ATs-A8s, A5s-A4s, AQo, KTs+, KQo, QTs+, JTs, 65s, 54s",
+                "call": "JJ-55, AQs-AJs, A7s-A6s, A3s, AKo, AJo, K9s, T9s, 76s",
+                "hero": {
+                    "HJ": 0
+                },
+                "villains": [
+                    {
+                        "UTG": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "HJ vs LJ RFI",
+                "raise": "88+, ATs+, A5s-A4s, AQo+, KTs+, KQo, QTs+, JTs, 76s, 65s, 54s",
+                "call": "",
+                "hero": {
+                    "HJ": 0
+                },
+                "villains": [
+                    {
+                        "LJ": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "CO vs UTG RFI",
+                "raise": "QQ+, AKs, ATs-A8s, A5s-A4s, KTs+, KQo, QTs+, JTs, 65s, 54s",
+                "call": "JJ-44, AQs-AJs, A7s-A6s, A3s-A2s, AJo+, K9s, J9s, T8s+, 98s, 76s",
+                "hero": {
+                    "CO": 0
+                },
+                "villains": [
+                    {
+                        "UTG": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "CO vs LJ RFI",
+                "raise": "77+, ATs+, A5s-A4s, AJo+, KTs+, KQo, QTs+, JTs, 76s, 65s, 54s",
+                "call": "",
+                "hero": {
+                    "CO": 0
+                },
+                "villains": [
+                    {
+                        "LJ": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "CO vs HJ RFI",
+                "raise": "77+, A9s+, A5s-A4s, AJo+, KTs+, KQo, QTs+, JTs, 87s, 76s, 65s, 54s",
+                "call": "",
+                "hero": {
+                    "CO": 0
+                },
+                "villains": [
+                    {
+                        "HJ": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BTN vs UTG RFI",
+                "raise": "KK+, AKs, ATs-A8s, A5s-A4s, KJs-KTs, KQo, QTs+, JTs, 65s, 54s",
+                "call": "QQ-33, AQs-AJs, A7s-A6s, A3s-A2s, ATo+, KQs, K9s-K7s, KJo, Q9s, J9s, T8s+, 97s+, 86s+, 75s+",
+                "hero": {
+                    "BTN": 0
+                },
+                "villains": [
+                    {
+                        "UTG": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BTN vs LJ RFI",
+                "raise": "77+, A9s+, A5s-A4s, AJo+, KTs+, KQo, QTs+, JTs, 87s, 76s, 65s, 54s",
+                "call": "",
+                "hero": {
+                    "BTN": 0
+                },
+                "villains": [
+                    {
+                        "LJ": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BTN vs HJ RFI",
+                "raise": "66+, A9s+, A5s-A3s, AJo+, K9s+, KQo, QTs+, JTs, T9s, 87s, 76s, 65s, 54s",
+                "call": "",
+                "hero": {
+                    "BTN": 0
+                },
+                "villains": [
+                    {
+                        "HJ": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BTN vs CO RFI",
+                "raise": "55+, A8s+, A5s-A3s, ATo+, K9s+, KJo+, Q9s+, J9s+, T9s, 87s, 76s, 65s, 54s",
+                "call": "",
+                "hero": {
+                    "BTN": 0
+                },
+                "villains": [
+                    {
+                        "CO": 7
+                    }
+                ],
+                "playerCount": 8
+            }
+        ]
+    },
+    {
+        "SB & BB vs RFI": [
+            {
+                "name": "SB vs UTG RFI",
+                "raise": "99+, ATs+, A5s-A4s, AQo+, KTs+, QTs+",
+                "call": "",
+                "hero": {
+                    "SB": 0.5
+                },
+                "villains": [
+                    {
+                        "UTG": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "SB vs LJ RFI",
+                "raise": "99+, ATs+, A5s-A4s, AQo+, KTs+, KQo, QTs+, JTs",
+                "call": "",
+                "hero": {
+                    "SB": 0.5
+                },
+                "villains": [
+                    {
+                        "LJ": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "SB vs HJ RFI",
+                "raise": "88+, ATs+, A5s-A4s, AJo+, KTs+, KQo, QTs+, JTs",
+                "call": "",
+                "hero": {
+                    "SB": 0.5
+                },
+                "villains": [
+                    {
+                        "HJ": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "SB vs CO RFI",
+                "raise": "77+, A9s+, A5s-A4s, AJo+, KTs+, KJo+, QTs+, JTs",
+                "call": "",
+                "hero": {
+                    "SB": 0.5
+                },
+                "villains": [
+                    {
+                        "CO": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "SB vs BTN RFI",
+                "raise": "66+, A9s+, A5s-A4s, ATo+, K9s+, KJo+, QTs+, QJo, JTs, T9s, 65s",
+                "call": "",
+                "hero": {
+                    "SB": 0.5
+                },
+                "villains": [
+                    {
+                        "BTN": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB vs UTG RFI",
+                "raise": "77+, ATs+, A5s-A4s, AQo+, KTs+, QJs",
+                "call": "",
+                "hero": {
+                    "BB": 1
+                },
+                "villains": [
+                    {
+                        "UTG": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB vs LJ RFI",
+                "raise": "99+, ATs+, A5s-A4s, AQo+, KTs+, KQo, QTs+, JTs",
+                "call": "",
+                "hero": {
+                    "BB": 1
+                },
+                "villains": [
+                    {
+                        "LJ": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB vs HJ RFI",
+                "raise": "77+, A9s+, A5s-A4s, AJo+, KTs+, KJo+, QTs+, JTs",
+                "call": "",
+                "hero": {
+                    "BB": 1
+                },
+                "villains": [
+                    {
+                        "HJ": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB vs CO RFI",
+                "raise": "66+, A9s+, A5s-A4s, ATo+, K9s+, KJo+, QTs+, QJo, JTs, T9s, 65s",
+                "call": "",
+                "hero": {
+                    "BB": 1
+                },
+                "villains": [
+                    {
+                        "CO": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB vs BTN RFI",
+                "raise": "55+, A2s+, ATo+, K9s+, KJo+, QTs+, QJo, J9s+, T9s, 65s",
+                "call": "",
+                "hero": {
+                    "BB": 1
+                },
+                "villains": [
+                    {
+                        "BTN": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB vs SB RFI",
+                "raise": "655+, A2s+, A8o+, K6s+, KTo+, Q9s+, QJo, J9s+, T9s, 65s",
+                "call": "",
+                "hero": {
+                    "BB": 1
+                },
+                "villains": [
+                    {
+                        "SB": 7.5
+                    }
+                ],
+                "playerCount": 8
+            }
+        ]
+    },
+    {
+        "STR vs RFI": [
+            {
+                "name": "STR vs UTG RFI",
+                "raise": "JJ+, AKs, A5s-A3s, AQo+, KQs, K6s-K5s, 98s, 87s",
+                "call": "TT-22, AQs-A6s, A2s, AJo-ATo, KJs-K7s, K4s-K3s, KJo+, Q5s+, QJo, J8s+, T6s+, 97s-96s, 86s-85s, 74s+, 63s+, 52s+, 43s",
+                "hero": {
+                    "STR": 2
+                },
+                "villains": [
+                    {
+                        "UTG": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "STR vs LJ RFI",
+                "raise": "TT+, AKs, A6s-A3s, AQo+, KJs+, K6s-K5s, JTo, QJo, 98s, 87s, 76s",
+                "call": "99-22, AQs-A7s, A2s, AJo-ATo, KTs-K7s, K4s-K2s, KJo+, Q3s+, J7s+, T6s+, 97s-96s, 86s-85s, 75s-74s, 63s+, 52s+, 42s+",
+                "hero": {
+                    "STR": 2
+                },
+                "villains": [
+                    {
+                        "LJ": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "STR vs HJ RFI",
+                "raise": "99+, AQs+, A6s-A3s, AQo+, KJs+, K6s-K5s, QJo, JTo, 98s, 87s, 76s",
+                "call": "88-22, AJs-A7s, A2s, AJo-A9o, KTs-K7s, K4s-K2s, KTo+, Q3s+, QTo, J7s+, T6s+, 97s-95s, 86s-84s, 75s-74s, 63s+, 52s+, 42s+",
+                "hero": {
+                    "STR": 2
+                },
+                "villains": [
+                    {
+                        "HJ": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "STR vs CO RFI",
+                "raise": "99+, AQs+, A6s-A3s, AQo+, KJs+, K6s-K5s, QJo, JTo, T9o, 98s, 87s, 76s",
+                "call": "88-22, AJs-A7s, A2s, AJo-A8o, KTs-K7s, K4s-K2s, KTo+, Q2s+, QTo, J5s+, T6s+, 97s-95s, 86s-84s, 75s-74s, 63s+, 52s+, 42s+",
+                "hero": {
+                    "STR": 2
+                },
+                "villains": [
+                    {
+                        "CO": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "STR vs BTN RFI",
+                "raise": "99+, ATs+, A6s-A3s, AJo+, A6o-A5o, KJs+, K6s-K5s, KQo, QJs, QJo, JTs, JTo, T9s, T9o, 98s, 87s, 76s, 65s, 54s",
+                "call": "88-22, A9s-A7s, A2s, ATo-A7o, A4o, KTs-K7s, K4s-K2s, KJo-K9o, QTs-Q2s, QTo-Q9o, J9s-J2s, J9o, T8s-T4s, 97s-95s, 86s-84s, 75s-74s, 64s-63s, 53s-52s, 42s+",
+                "hero": {
+                    "STR": 2
+                },
+                "villains": [
+                    {
+                        "BTN": 7
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "STR vs SB RFI",
+                "raise": "TT+, AJs+, AJo+, A3o-A2o, KQs, K3o-K2o, J6o, T6o, 96o, 87s, 76s, 65s, 54s",
+                "call": "99-22, ATs-A2s, ATo-A4o, KJs-K2s, K6o+, Q2s+, Q7o+, J2s+, J7o+, T2s+, T7o+, 92s+, 97o+, 86s-82s, 86o+, 75s-72s, 75o+, 64s-62s, 65o, 53s-52s, 54o, 42s+, 32s",
+                "hero": {
+                    "STR": 2
+                },
+                "villains": [
+                    {
+                        "SB": 7.5
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "STR vs BB RFI",
+                "raise": "88+, ATs+, ATo+, A3o-A2o, KJs+, KQo, K3o-K2o, QJs, Q5o, JTs, J6o-J4o, T9s, T6o, 98s, 96o, 87s, 76s, 65s, 54s",
+                "call": "77-22, A9s-A2s, A9o-A4o, KTs-K2s, KJo-K4o, QTs-Q2s, Q6o+, Q4o-Q3o, J9s-J2s, J7o+, T8s-T2s, T7o+, 97s-92s, 97o+, 86s-82s, 86o+, 75s-72s, 75o+, 64s-62s, 64o+, 53s-52s, 53o+, 42s+, 32s",
+                "hero": {
+                    "STR": 2
+                },
+                "villains": [
+                    {
+                        "BB": 8
+                    }
+                ],
+                "playerCount": 8
+            }
+        ]
+    },
+    {
+        "vs. IP 3B": [
+            {
+                "name": "UTG vs LJ 3B",
+                "raise": "JJ+, AKs, AJs-ATs, AQo, KQs, KTs",
+                "call": "TT-66, AQs, A5s-A4s, AKo, KJs, QJs, JTs, T9s, 65s",
+                "hero": {
+                    "UTG": 7
+                },
+                "villains": [
+                    {
+                        "LJ": 21
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "UTG vs HJ 3B",
+                "raise": "TT+, AKs, AJs-ATs, AQo, KQs, KTs",
+                "call": "99-66, AQs, A5s-A4s, AKo, KJs, QJs, JTs, T9s, 65s",
+                "hero": {
+                    "UTG": 7
+                },
+                "villains": [
+                    {
+                        "HJ": 21
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "UTG vs CO 3B",
+                "raise": "TT+, AKs, AJs-ATs, AQo, KQs, KTs",
+                "call": "99-66, AQs, A9s, A5s-A4s, AKo, KJs, QTs+, JTs, T9s, 65s",
+                "hero": {
+                    "UTG": 7
+                },
+                "villains": [
+                    {
+                        "CO": 21
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "UTG vs BTN 3B",
+                "raise": "TT+, AKs, AJs-ATs, AQo, KQs, KTs",
+                "call": "99-66, AQs, A9s, A5s-A4s, AKo, KJs, QTs+, JTs, T9s, 65s",
+                "hero": {
+                    "UTG": 7
+                },
+                "villains": [
+                    {
+                        "BTN": 21
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "LJ vs HJ 3B",
+                "raise": "TT+, AJs-ATs, AQo+, KQs, KTs",
+                "call": "99, AQs+, A9s, A5s, KJs, QTs+, JTs, T9s, 99-66, 65s",
+                "hero": {
+                    "LJ": 7
+                },
+                "villains": [
+                    {
+                        "HJ": 21
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "LJ vs CO 3B",
+                "raise": "TT+, AKs, AJs-ATs, AQo+, KQs, KTs, QJs",
+                "call": "99, AQs, A9s-A8s, A5s-A4s, KJs, K9s, QTs, J9s+, T9s, 99-66, 65s",
+                "hero": {
+                    "LJ": 7
+                },
+                "villains": [
+                    {
+                        "CO": 21
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "LJ vs BTN 3B",
+                "raise": "TT+, AKs, AJs-ATs, AQo+, KQs, KTs, QJs",
+                "call": "99, AQs, A9s-A8s, A5s-A4s, KJs, K9s, QTs, J9s+, T9s, 99-66, 65s",
+                "hero": {
+                    "LJ": 7
+                },
+                "villains": [
+                    {
+                        "BTN": 21
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "HJ vs CO 3B",
+                "raise": "TT+, AKs, AJs-ATs, AJo+, KTs",
+                "call": "99-66, AQs, A9s-A8s, A5s-A4s, KJs+, K9s, QTs+, J9s+, T9s, 65s",
+                "hero": {
+                    "HJ": 7
+                },
+                "villains": [
+                    {
+                        "CO": 21
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "HJ vs BTN 3B",
+                "raise": "99+, AKs, AJs-ATs, AJo+, KTs",
+                "call": "88-55, AQs, A9s-A7s, A5s-A2s, KJs+, K9s, KQo, Q9s+, J9s+, T9s, 76s, 65s",
+                "hero": {
+                    "HJ": 7
+                },
+                "villains": [
+                    {
+                        "BTN": 21
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "CO vs BTN 3B",
+                "raise": "TT+, AKs, AJs-ATs, AJo+, KTs",
+                "call": "99-44, AQs, A9s-A3s, KJs+, K9s, KQo, Q9s+, J9s+, T9s, 98s",
+                "hero": {
+                    "CO": 7
+                },
+                "villains": [
+                    {
+                        "BTN": 21
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "SB vs BB 3B",
+                "raise": "88+, A9s+, ATo+, KJs+, KQo",
+                "call": "77-55, A8s, A5s, KTs, QTs+, JTs, T9s",
+                "hero": {
+                    "SB": 7
+                },
+                "villains": [
+                    {
+                        "BB": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "SB vs STR 3B",
+                "raise": "TT+, AQs+, ATo+, KQs, KQo",
+                "call": "99-55, AJs-A2s, KJs-K8s, KJo, Q8s+, J9s+, T8s+, 98s",
+                "hero": {
+                    "SB": 7
+                },
+                "villains": [
+                    {
+                        "STR": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB vs STR 3B",
+                "raise": "99+, AJs+, A7o+, KQs, KQo",
+                "call": "88-33, ATs-A2s, KJs-K6s, KJo, Q7s+, QJo, J7s+, JTo, T7s+, 97s+, 87s",
+                "hero": {
+                    "BB": 7
+                },
+                "villains": [
+                    {
+                        "STR": 28
+                    }
+                ],
+                "playerCount": 8
+            }
+        ]
+    },
+    {
+        "vs. OOP 3B": [
+            {
+                "name": "UTG vs SB 3B",
+                "raise": "QQ+, AJs-ATs, AKo, KTs",
+                "call": "JJ-66, AQs+, AQo, KJs+",
+                "hero": {
+                    "UTG": 7
+                },
+                "villains": [
+                    {
+                        "SB": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "UTG vs BB 3B",
+                "raise": "JJ+, AJs-ATs, AKo, AJo, KTs",
+                "call": "TT-66, AQs+, AQo, KJs+, 65s",
+                "hero": {
+                    "UTG": 7
+                },
+                "villains": [
+                    {
+                        "BB": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "UTG vs STR 3B",
+                "raise": "QQ+, AKo",
+                "call": "JJ-66, A9s+, A5s, AQo, KTs+, QTs+, JTs, 65s",
+                "hero": {
+                    "UTG": 7
+                },
+                "villains": [
+                    {
+                        "STR": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "LJ vs SB 3B",
+                "raise": "QQ+, ATs, AKo, KTs",
+                "call": "JJ-66, AJs+, AQo, KJs+, JTs, 65s",
+                "hero": {
+                    "LJ": 7
+                },
+                "villains": [
+                    {
+                        "SB": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "LJ vs BB 3B",
+                "raise": "JJ+, ATs, AKo, AJo, KTs",
+                "call": "TT-66, AJs+, AQo, KJs+, JTs, 65s",
+                "hero": {
+                    "LJ": 7
+                },
+                "villains": [
+                    {
+                        "BB": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "LJ vs STR 3B",
+                "raise": "QQ+, ATs, AKo, KTs",
+                "call": "JJ-66, AJs+, A9s-A7s, A5s-A4s, AQo, KJs+, QTs+, JTs, T9s, 65s",
+                "hero": {
+                    "LJ": 7
+                },
+                "villains": [
+                    {
+                        "STR": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "HJ vs SB 3B",
+                "raise": "JJ+, ATs, AKo, AJo, KTs",
+                "call": "TT-55, AJs+, A5s, AQo, KJs+, QTs+, JTs, T9s, 76s, 65s",
+                "hero": {
+                    "HJ": 7
+                },
+                "villains": [
+                    {
+                        "SB": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "HJ vs BB 3B",
+                "raise": "JJ+, AJs-ATs, AKo, AJo-ATo, KTs",
+                "call": "TT-55, AQs+, A9s, A5s-A4s, AQo, KJs+, QTs+, JTs, T9s, 76s, 65s",
+                "hero": {
+                    "HJ": 7
+                },
+                "villains": [
+                    {
+                        "BB": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "HJ vs STR 3B",
+                "raise": "JJ+, ATs, AKo, AJo, KTs",
+                "call": "TT-55, AJs+, A9s-A7s, A5s-A3s, AQo, KJs+, K9s, Q9s+, JTs, T9s, 76s, 65s",
+                "hero": {
+                    "HJ": 7
+                },
+                "villains": [
+                    {
+                        "STR": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "CO vs SB 3B",
+                "raise": "JJ+, AJs-ATs, AKo, AJo, KTs",
+                "call": "TT-44, AQs+, A9s, A5s-A4s, AQo, KJs+, QTs+, JTs, T9s, 76s, 65s",
+                "hero": {
+                    "CO": 7
+                },
+                "villains": [
+                    {
+                        "SB": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "CO vs BB 3B",
+                "raise": "JJ+, AJs-ATs, AKo, AJo-ATo, KTs",
+                "call": "TT-44, AQs+, A9s, A5s-A4s, AQo, KJs+, KQo, QTs+, JTs, T9s, 76s, 65s",
+                "hero": {
+                    "CO": 7
+                },
+                "villains": [
+                    {
+                        "BB": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "CO vs STR 3B",
+                "raise": "JJ+, AJs-ATs, AKo, AJo, KTs",
+                "call": "TT-44, AQs+, A9s-A2s, AQo, KJs+, KQo, QTs+, JTs, T9s, 98s, 76s, 65s",
+                "hero": {
+                    "CO": 7
+                },
+                "villains": [
+                    {
+                        "STR": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BTN vs SB 3B",
+                "raise": "TT+, AJs-ATs, AKo, AJo-ATo, KTs",
+                "call": "99-22, AQs+, A9s-A8s, A5s-A3s, AQo, KJs+, K9s, KQo, QTs+, J9s+, T9s, 98s, 87s, 76s, 65s, 54s",
+                "hero": {
+                    "BTN": 7
+                },
+                "villains": [
+                    {
+                        "SB": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BTN vs BB 3B",
+                "raise": "TT+, AJs-ATs, AKo, AJo-A9o, KTs",
+                "call": "99-22, AQs+, A9s-A2s, AQo, KJs+, K9s, KJo+, Q9s+, J9s+, T8s+, 98s, 87s, 76s, 65s, 54s",
+                "hero": {
+                    "BTN": 7
+                },
+                "villains": [
+                    {
+                        "BB": 28
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BTN vs STR 3B",
+                "raise": "JJ+, AJs-ATs, AKo, AJo-ATo, KTs",
+                "call": "TT-22, AQs+, A9s-A2s, AQo, KJs+, K9s-K6s, KJo+, Q8s+, QJo, J8s+, T8s+, 98s, 87s, 76s, 65s, 54s",
+                "hero": {
+                    "BTN": 7
+                },
+                "villains": [
+                    {
+                        "STR": 28
+                    }
+                ],
+                "playerCount": 8
+            }
+        ]
+    },
+    {
+        "vs. OOP 4B": [
+            {
+                "name": "LJ vs UTG 4B",
+                "raise": "KK-TT, AKs, AKo",
+                "call": "AA, AQs",
+                "hero": {
+                    "LJ": 21
+                },
+                "villains": [
+                    {
+                        "UTG": 63
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "HJ vs UTG 4B",
+                "raise": "KK-TT, AKs, AKo",
+                "call": "AA, AQs, KQs",
+                "hero": {
+                    "HJ": 21
+                },
+                "villains": [
+                    {
+                        "UTG": 63
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "CO vs UTG 4B",
+                "raise": "KK-TT, AKs, AKo",
+                "call": "AA, AQs, AJs, KQs",
+                "hero": {
+                    "CO": 21
+                },
+                "villains": [
+                    {
+                        "UTG": 63
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BTN vs UTG 4B",
+                "raise": "KK-TT, AKs, AKo",
+                "call": "AA, AQs, KQs",
+                "hero": {
+                    "BTN": 21
+                },
+                "villains": [
+                    {
+                        "UTG": 63
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "HJ vs LJ 4B",
+                "raise": "KK-TT, AKs, AKo",
+                "call": "AA, AQs, AJs, KQs",
+                "hero": {
+                    "HJ": 21
+                },
+                "villains": [
+                    {
+                        "LJ": 63
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "CO vs LJ 4B",
+                "raise": "KK-TT, AKs, AKo",
+                "call": "AA, AQs, AJs, KQs",
+                "hero": {
+                    "CO": 21
+                },
+                "villains": [
+                    {
+                        "LJ": 63
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BTN vs LJ 4B",
+                "raise": "KK-TT, AKs, AKo",
+                "call": "AA, AQs-ATs, KQs-KJs, 99",
+                "hero": {
+                    "BTN": 21
+                },
+                "villains": [
+                    {
+                        "LJ": 63
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "CO vs HJ 4B",
+                "raise": "KK-TT, AKs, AKo, KQs",
+                "call": "AA, AQs, AJs, AQo",
+                "hero": {
+                    "CO": 21
+                },
+                "villains": [
+                    {
+                        "HJ": 63
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BTN vs HJ 4B",
+                "raise": "KK-TT, AKs, AKo, KQs",
+                "call": "AA, AQs, AJs, AQo",
+                "hero": {
+                    "BTN": 21
+                },
+                "villains": [
+                    {
+                        "HJ": 63
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BTN vs CO 4B",
+                "raise": "KK-TT, AKs, AQo+, KQs",
+                "call": "AA, 99-88, AQs-AJs",
+                "hero": {
+                    "BTN": 21
+                },
+                "villains": [
+                    {
+                        "CO": 63
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB vs SB 4B",
+                "raise": "KK-88, AQs+, AJo+, KQs",
+                "call": "AA, 77, AJs-A9s, KJs-KTs, QJs",
+                "hero": {
+                    "BB": 21
+                },
+                "villains": [
+                    {
+                        "SB": 63
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "STR vs SB 4B",
+                "raise": "KK-JJ, AKs, AKo",
+                "call": "AA, AQs-AJs, AQo, KQs",
+                "hero": {
+                    "STR": 21
+                },
+                "villains": [
+                    {
+                        "SB": 63
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "STR vs BB 4B",
+                "raise": "KK-99, AQs+, AQo+, KJs+, QJs+",
+                "call": "AA, 88, AJs-ATs, AJo-ATo, KQo",
+                "hero": {
+                    "STR": 21
+                },
+                "villains": [
+                    {
+                        "BB": 63
+                    }
+                ],
+                "playerCount": 8
+            }
+        ]
+    },
+    {
+        "vs. IP 4b": [
+            {
+                "name": "SB vs UTG 4B",
+                "raise": "99+, AKs, AKo",
+                "call": "AQs-ATs, A5s, KQs",
+                "hero": {
+                    "SB": 28
+                },
+                "villains": [
+                    {
+                        "UTG": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB vs UTG 4B",
+                "raise": "99+, AKs, AKo",
+                "call": "AQs-AJs, KQs",
+                "hero": {
+                    "BB": 32
+                },
+                "villains": [
+                    {
+                        "UTG": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "STR vs UTG 4B",
+                "raise": "JJ+, AKs, AKo",
+                "call": "KQs, A5s, A4s",
+                "hero": {
+                    "STR": 28
+                },
+                "villains": [
+                    {
+                        "UTG": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "SB vs LJ 4B",
+                "raise": "JJ+, AKs, AKo, A5s",
+                "call": "AQs-AJs, KQs, AQo, TT",
+                "hero": {
+                    "SB": 28
+                },
+                "villains": [
+                    {
+                        "LJ": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB vs LJ 4B",
+                "raise": "TT+, AKs, AKo, A5s",
+                "call": "AQs-AJs, KQs-KTs, AQo, 99",
+                "hero": {
+                    "BB": 32
+                },
+                "villains": [
+                    {
+                        "LJ": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "STR vs LJ 4B",
+                "raise": "JJ+, AKs, AKo",
+                "call": "KQs, KJs, A5s, A4s",
+                "hero": {
+                    "STR": 28
+                },
+                "villains": [
+                    {
+                        "LJ": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "SB vs HJ 4B",
+                "raise": "TT+, AKs, AKo, A5s",
+                "call": "AQs-ATs, KQs-KTs, AQo, 99",
+                "hero": {
+                    "SB": 28
+                },
+                "villains": [
+                    {
+                        "HJ": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB vs HJ 4B",
+                "raise": "99+, AKs, A5s, AKo",
+                "call": "88, AQs-ATs, AQo, KJs+",
+                "hero": {
+                    "BB": 32
+                },
+                "villains": [
+                    {
+                        "HJ": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "STR vs HJ 4B",
+                "raise": "99+, AKs, AKo",
+                "call": "AQs, A5s-A4s, AQo, KQs",
+                "hero": {
+                    "STR": 28
+                },
+                "villains": [
+                    {
+                        "HJ": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "SB vs CO 4B",
+                "raise": "99+, AKs, AKo, A5s, A4s",
+                "call": "88, AQs-A9s, AQo, KJs+, QTs+",
+                "hero": {
+                    "SB": 28
+                },
+                "villains": [
+                    {
+                        "CO": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB vs CO 4B",
+                "raise": "99+, AKs, AKo, A5s, A4s",
+                "call": "88-66, AQs-A9s, AQo, KTs+, KQo, QTs+",
+                "hero": {
+                    "BB": 32
+                },
+                "villains": [
+                    {
+                        "CO": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "STR vs CO 4B",
+                "raise": "TT+, AKs, AKo",
+                "call": "99, AQs, A5s-A4s, AQo, KJs+, 98s, 87s, 76s",
+                "hero": {
+                    "STR": 28
+                },
+                "villains": [
+                    {
+                        "CO": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "SB vs BTN 4B",
+                "raise": "99+, AKs, A5s-A4s, AKo",
+                "call": "88-77, AQs-A9s, AQo-AJo, KTs+, KQo, QTs+, JTs, 65s",
+                "hero": {
+                    "SB": 28
+                },
+                "villains": [
+                    {
+                        "BTN": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "BB vs BTN 4B",
+                "raise": "99+, AKs, A5s-A4s, AQo+",
+                "call": "88-77, AQs-A6s, AJo, KTs+, KQo, QTs+, JTs, 65s",
+                "hero": {
+                    "BB": 32
+                },
+                "villains": [
+                    {
+                        "BTN": 56
+                    }
+                ],
+                "playerCount": 8
+            },
+            {
+                "name": "STR vs BTN 4B",
+                "raise": "99+, AKs, A5s-A4s, AKo",
+                "call": "88, AQs-ATs, AQo-AJo, KJs+, KQo, QJs",
+                "hero": {
+                    "STR": 28
+                },
+                "villains": [
+                    {
+                        "BTN": 56
+                    }
+                ],
+                "playerCount": 8
+            }
+        ]
+    }
+]

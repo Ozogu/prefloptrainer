@@ -6,7 +6,10 @@ import RangeSelector from './RangeSelector';
 import GameButtons from './GameButtons';
 import Score from './Score';
 import ActionHistoryPanel from './ActionHistoryPanel';
-import defaultRanges from './headsup.json';
+import shortHanded from './shorthanded.json';
+import { parseRange, cards } from './rangeutils';
+
+const allRanges = [...shortHanded];
 
 function App() {
   const RenderCoffee = () => {
@@ -27,7 +30,7 @@ function App() {
   const clearLocalStorage = () => {
     localStorage.clear();
     setSelectedRanges({});
-    setSavedRanges(defaultRanges);
+    setSavedRanges(allRanges);
   };
 
   const RenderClearLocalStorage = () => (
@@ -67,7 +70,7 @@ function App() {
       return null;
     }
 
-    // Check if the range has a predefined hand
+    // Check if the range has a predefined single hand
     if (range.hand) {
       const hand = range.hand;
       const suits = ['c', 'd', 'h', 's'];
@@ -84,65 +87,54 @@ function App() {
       return [randomSuit1, randomSuit2];
       };
 
-      // Handle suited hands like "AQs"
       if (hand.length === 3 && hand[2] === 's') {
       const [suit] = getRandomSuits(true);
       return [`${hand[0]}${suit}`, `${hand[1]}${suit}`];
       }
-
-      // Handle offsuit hands like "AQo"
       if (hand.length === 3 && hand[2] === 'o') {
       const [suit1, suit2] = getRandomSuits(false);
       return [`${hand[0]}${suit1}`, `${hand[1]}${suit2}`];
       }
-
-      // Handle exact hands like "AdQd"
       if (hand.length === 4) {
       return [hand.substring(0, 2), hand.substring(2, 4)];
       }
-
-      // Handle pocket pairs like "44"
       if (hand.length === 2 && hand[0] === hand[1]) {
       const [suit1, suit2] = getRandomSuits(false);
       return [`${hand[0]}${suit1}`, `${hand[1]}${suit2}`];
       }
     }
 
-    // Fall back to random hand generation if no predefined hand exists
-    if (!range.corner) {
-      return null;
-    }
+    // Use all 169 canonical hands so fold-only hands are also queried.
+    // determineCorrectAction returns 'fold' for any hand not in raise/call/mixed.
+    const allHands = cards;
+    if (allHands.length === 0) return null;
 
-    range = range.corner;
+    const shortHand = allHands[Math.floor(Math.random() * allHands.length)];
+    return shortHandToCards(shortHand);
+  };
 
-    let randomHand = null;
-    while (!randomHand) {
-      const randomHandIndex = Math.floor(Math.random() * range.length);
-      randomHand = range[randomHandIndex];
-    }
-
-    let suit = 'o';
-    if (randomHand.length == 3 && randomHand[2] === 's') {
-      suit = 's';
-    }
-
-    randomHand = randomHand.replace(/\s+/g, '');
-    const suits = [ 'c', 'd', 'h', 's' ];
+  const shortHandToCards = (shortHand) => {
+    if (!shortHand) return null;
+    const suits = ['c', 'd', 'h', 's'];
     const randomSuit1 = suits[Math.floor(Math.random() * suits.length)];
 
-    let retval;
-    if (suit == 'o') {
-      let randomSuit2;
-      do {
-        randomSuit2 = suits[Math.floor(Math.random() * suits.length)];
-      } while (randomSuit2 === randomSuit1);
-
-      retval = [`${randomHand[0]}${randomSuit1}`, `${randomHand[1]}${randomSuit2}`];
-    } else {
-      retval = [`${randomHand[0]}${randomSuit1}`, `${randomHand[1]}${randomSuit1}`];
+    // Pocket pair e.g. "AA"
+    if (shortHand.length === 2 && shortHand[0] === shortHand[1]) {
+      let s2;
+      do { s2 = suits[Math.floor(Math.random() * suits.length)]; } while (s2 === randomSuit1);
+      return [`${shortHand[0]}${randomSuit1}`, `${shortHand[0]}${s2}`];
     }
-
-    return retval;
+    // Suited e.g. "AKs"
+    if (shortHand.length === 3 && shortHand[2] === 's') {
+      return [`${shortHand[0]}${randomSuit1}`, `${shortHand[1]}${randomSuit1}`];
+    }
+    // Offsuit e.g. "AKo"
+    if (shortHand.length === 3 && shortHand[2] === 'o') {
+      let s2;
+      do { s2 = suits[Math.floor(Math.random() * suits.length)]; } while (s2 === randomSuit1);
+      return [`${shortHand[0]}${randomSuit1}`, `${shortHand[1]}${s2}`];
+    }
+    return null;
   };
 
   const onAction = (range, hand, action, correctAction) => {
@@ -195,7 +187,7 @@ function App() {
   // State to manage saved ranges
   const [savedRanges, setSavedRanges] = useState(() => {
     const saved = localStorage.getItem('savedRanges');
-    return saved ? JSON.parse(saved) : defaultRanges; // Use defaultRanges if nothing is saved
+    return saved ? JSON.parse(saved) : allRanges; // Use allRanges if nothing is saved
   });
 
   // Save savedRanges to localStorage whenever it changes

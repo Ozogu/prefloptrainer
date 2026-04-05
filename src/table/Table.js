@@ -125,8 +125,11 @@ const Player = ({ player, index, cardsToDisplay, range, randomNumber }) => (
         <Card card={cardsToDisplay?.[0] ?? null} />
         <Card card={cardsToDisplay?.[1] ?? null} />
 
-        {/* Display only random number if frequency is defined */}
-        {range && range.correct && Array.isArray(range.correct) && (
+        {/* Display random number when there are mixed strategies */}
+        {range && (
+          (range.correct && Array.isArray(range.correct)) ||
+          (range.mixed && Object.keys(range.mixed).length > 0)
+        ) && (
             <div className="frequency-indicator">
             <span className="random-number">RNG: {randomNumber}</span>
             </div>
@@ -148,7 +151,13 @@ class Table extends React.Component {
     let positionClasses = [];
     let heroOffset = 0;
 
-    if (playerCount == 6) {
+    if (playerCount == 2) {
+      positions = ['BTN', 'BB'];
+      positionClasses = ['bottom-right', 'top-left'];
+    } else if (playerCount == 3) {
+      positions = ['BTN', 'SB', 'BB'];
+      positionClasses = ['bottom-right', 'top-right', 'top-left'];
+    } else if (playerCount == 6) {
       // All table positions in order
       positions = ['UTG', 'HJ', 'CO', 'BTN', 'SB', 'BB'];
 

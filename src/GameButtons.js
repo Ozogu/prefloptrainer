@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './GameButtons.css';
-import { isHandInRange, parseRange } from './rangeutils';
+import { isHandInRange, parseRange, roundMixedFreqs } from './rangeutils';
 
 const RenderButton = ({ name, onClick, feedback, hotkey, className, buttonIndex }) => {
   // Check if this is a ghost button
@@ -41,29 +41,56 @@ const handToShortForm = (hand) => {
 };
 
 const determineCorrectAction = (hand, range) => {
-  // If we have a correct action in the range, use that
+  // If we have a correct action override in the range, use that
   if (range && range.correct) {
-    // Return the correct action as-is, preserving the exact format from the range data
     return range.correct;
   }
 
-  // Otherwise use the traditional raise/call/fold logic
-  hand = handToShortForm(hand);
+  const shortHand = handToShortForm(hand);
+
+  // Per-hand mixed strategy frequencies: { "TT": [raise_freq, call_freq, fold_freq] } summing to 1.
+  // Lower RNG => more aggressive action (raise first, then call, then fold).
+  if (range && range.mixed && range.mixed[shortHand]) {
+    return range.mixed[shortHand];
+  }
+
+  // Traditional raise/call/fold logic
   if (range !== null && range.raise) {
     const r = parseRange(range.raise);
-    if (isHandInRange(r, hand)) {
+    if (isHandInRange(r, shortHand)) {
       return 'raise';
     }
   }
 
   if (range !== null && range.call) {
     const r = parseRange(range.call);
-    if (isHandInRange(r, hand)) {
+    if (isHandInRange(r, shortHand)) {
       return 'call';
     }
   }
 
   return 'fold';
+};
+
+/**
+ * Determines if an action is correct based on mixed strategy frequencies.
+ * Frequencies are fractions summing to 1. Lower RNG => more aggressive action.
+ * Order is always: raise (lowest RNG bucket), call, fold (highest RNG bucket).
+ * @param {string} action - The user's action ('raise', 'call', or 'fold')
+ * @param {Array} frequencies - [raise_freq, call_freq, fold_freq] summing to 1
+ * @param {number} rng - Random number 1-100
+ * @returns {boolean}
+ */
+const isCorrectBasedOnMixedFrequency = (action, frequencies, rng) => {
+  const [raiseFreq, callFreq, foldFreq] = roundMixedFreqs(frequencies);
+  const raiseThreshold = raiseFreq * 100;
+  const callThreshold = raiseThreshold + callFreq * 100;
+
+  const a = action.toLowerCase();
+  if (a === 'raise') return raiseFreq > 0 && rng <= raiseThreshold;
+  if (a === 'call')  return callFreq  > 0 && rng > raiseThreshold && rng <= callThreshold;
+  if (a === 'fold')  return foldFreq  > 0 && rng > callThreshold;
+  return false;
 };
 
 /**
@@ -164,13 +191,21 @@ const GameButtons = ({ hand, range, onAction, randomNumber }) => {
     let isCorrect = false;
 
     if (Array.isArray(correctAction)) {
-      // Handle frequency table format
-      isCorrect = isCorrectBasedOnFrequency(
-        action,
-        rangeRef.current.options,
-        correctAction,
-        rngRef.current
-      );
+      // If frequencies sum to ~1 it is the new mixed-strategy format; otherwise legacy.
+      const freqSum = correctAction.reduce((a, b) => a + b, 0);
+      if (Math.abs(freqSum - 1) < 0.1) {
+        // Mixed strategy: [raise_freq, call_freq, fold_freq] summing to 1.
+        // Lower RNG => raise (most aggressive).
+        isCorrect = isCorrectBasedOnMixedFrequency(action, correctAction, rngRef.current);
+      } else {
+        // Legacy frequency table format using range.options
+        isCorrect = isCorrectBasedOnFrequency(
+          action,
+          rangeRef.current.options,
+          correctAction,
+          rngRef.current
+        );
+      }
     } else {
       // Traditional single-action comparison
       isCorrect = action === correctAction;

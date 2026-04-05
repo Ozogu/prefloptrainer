@@ -1,7 +1,7 @@
 // rangeselector.js
 import React, { useState } from 'react';
 import './RangeSelector.css';
-import { parseCornerRange } from './rangeutils';
+import { parseCornerRange, parseRange } from './rangeutils';
 import UploadRangesModal from './UploadRangesModal';
 
 const expandRanges = (range) => {
@@ -11,10 +11,20 @@ const expandRanges = (range) => {
   }
 
   const newRange = { ...range };
-  const parsedRaiseRange = parseCornerRange(range.raise);
-  const parsedCallRange = parseCornerRange(range.call);
-  const combinedRange = [...parsedRaiseRange, ...parsedCallRange];
-  newRange.corner = [...new Set(combinedRange)];
+
+  // If the range has mixed strategies, skip corner range and use full parsed range
+  if (range.mixed && Object.keys(range.mixed).length > 0) {
+    const raiseHands = range.raise ? parseRange(range.raise) : [];
+    const callHands = range.call ? parseRange(range.call) : [];
+    const mixedHands = Object.keys(range.mixed);
+    const combined = [...new Set([...raiseHands, ...callHands, ...mixedHands])];
+    newRange.corner = combined;
+  } else {
+    const parsedRaiseRange = parseCornerRange(range.raise);
+    const parsedCallRange = parseCornerRange(range.call);
+    const combinedRange = [...parsedRaiseRange, ...parsedCallRange];
+    newRange.corner = [...new Set(combinedRange)];
+  }
 
   return newRange;
 };

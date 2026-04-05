@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ActionHistoryPanel.css';
 import Card from './table/Card';
+import { roundMixedFreqs } from './rangeutils';
 
 // Component to render the hole cards
 const HoleCards = ({ holeCards }) => (
@@ -36,6 +37,46 @@ const ActionItem = ({ action, onHover }) => {
 
   const zipArrays = (arr1, arr2) => arr1.map((item, index) => `${item}:${arr2[index]}`);
 
+  const handToShortForm = (holeCards) => {
+    if (!holeCards || holeCards.length !== 2) return null;
+    const [c1, c2] = holeCards;
+    if (c1[0] === c2[0]) return c1[0] + c2[0]; // pocket pair
+    if (c1[1] === c2[1]) return c1[0] + c2[0] + 's'; // suited
+    return c1[0] + c2[0] + 'o'; // offsuit
+  };
+
+  const renderFrequencyInfo = () => {
+    const { range, holeCards } = action;
+    // Legacy correct-array format
+    if (range.correct && Array.isArray(range.correct) && range.options) {
+      return (
+        <>
+          <div className="frequency-info">RNG: {range.rng}</div>
+          <div>{zipArrays(range.options, range.correct).join(', ')}</div>
+        </>
+      );
+    }
+    // New mixed strategy format
+    if (range.mixed && Object.keys(range.mixed).length > 0) {
+      const shortHand = handToShortForm(holeCards);
+      const rawFreqs = shortHand && range.mixed[shortHand];
+      const freqs = rawFreqs ? roundMixedFreqs(rawFreqs) : null;
+      return (
+        <>
+          <div className="frequency-info">RNG: {range.rng}</div>
+          {freqs && (
+            <div>
+              Raise: {(freqs[0] * 100).toFixed(0)}%&nbsp;
+              Call: {(freqs[1] * 100).toFixed(0)}%&nbsp;
+              Fold: {(freqs[2] * 100).toFixed(0)}%
+            </div>
+          )}
+        </>
+      );
+    }
+    return null;
+  };
+
   return (
     <li
       ref={itemRef}
@@ -57,17 +98,7 @@ const ActionItem = ({ action, onHover }) => {
       {showNote && (
         <div className={`note-container ${notePosition}`}>
           {action.range.note && <div>{action.range.note}</div>}
-          {action.range.correct ? (
-            <>
-              <div className="frequency-info">RNG: {action.range.rng}</div>
-              <div>
-                {zipArrays(
-                  action.range.options,
-                  action.range.correct
-                ).join(', ')}
-              </div>
-            </>
-          ) : null}
+          {renderFrequencyInfo()}
         </div>
       )}
     </li>
